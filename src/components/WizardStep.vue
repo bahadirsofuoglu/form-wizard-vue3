@@ -1,61 +1,66 @@
 <template>
-  <li :class="{ active: tab.active }">
-    <a href="javascript:void(0)">
+  <li>
+    <a>
       <div
-        :id="`step-${tab.tabId}`"
+        :id="`step-${tab.valuetabId}`"
         class="fw-icon-circle md"
         role="tab"
-        :tabindex="tab.checked ? 0 : ''"
-        :aria-controls="tab.tabId"
-        :aria-disabled="tab.active"
-        :aria-selected="tab.active"
+        :tabindex="tab.valuechecked ? 0 : ''"
+        :aria-controls="tab.valuetabId"
+        :aria-disabled="tab.valueactive"
+        :aria-selected="tab.valueactive"
         :class="{
-          checked: tab.checked,
+          checked: tab.valuechecked,
           square_shape: isStepSquare,
           tab_shape: isTabShape
         }"
         :style="[
-          tab.checked ? stepCheckedStyle : {},
-          tab.validationError ? errorStyle : {}
+          tab.valuechecked ? stepCheckedStyle : {},
+          tab.valuevalidationError ? errorStyle : {}
         ]"
       >
         <div
-          v-if="tab.active"
+          v-if="tab.valueactive"
           class="fw-icon-container"
           :class="{ square_shape: isStepSquare, tab_shape: isTabShape }"
           :style="[
-            tab.active ? iconActiveStyle : {},
-            tab.validationError ? errorStyle : {}
+            tab.valueactive ? iconActiveStyle : {},
+            tab.valuevalidationError ? errorStyle : {}
           ]"
         >
           <slot name="active-step">
-            <i v-if="tab.icon" :icon="tab.icon" class="fw-icon"></i>
+            <i v-if="tab.valueicon" :icon="tab.valueicon" class="fw-icon"></i>
             <i v-else class="fw-icon">{{ index + 1 }}</i>
           </slot>
         </div>
-        <slot v-if="!tab.active">
+        <slot v-if="!tab.valueactive">
           <i
-            v-if="!tab.active && tab.icon"
-            :icon="tab.icon"
+            v-if="!tab.valueactive && tab.valueicon"
+            :icon="tab.valueicon"
             class="fw-icon"
           ></i>
-          <i v-if="!tab.active && !tab.icon" class="fw-icon">{{ index + 1 }}</i>
+          <i v-if="!tab.valueactive && !tab.valueicon" class="fw-icon">{{
+            index + 1
+          }}</i>
         </slot>
       </div>
       <slot name="title">
         <span
           class="stepTitle"
-          :class="{ active: tab.active, has_error: tab.validationError }"
-          :style="tab.active ? stepTitleStyle : {}"
+          :class="{
+            active: tab.valueactive,
+            has_error: tab.valuevalidationError
+          }"
+          :style="tab.valueactive ? stepTitleStyle : {}"
         >
-          {{ tab.title }}
+          {{ tab.valuetitle }}
         </span>
       </slot>
     </a>
   </li>
 </template>
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { onMounted, computed } from 'vue'
 defineProps({
   tab: {
     type: Object,
@@ -68,30 +73,30 @@ defineProps({
 })
 
 onMounted(() => {
-  console.log(tab)
+  console.log('hello')
 })
 const iconActiveStyle = computed(() => {
   return {
-    backgroundColor: tab.color ?? '#2c3e50'
+    backgroundColor: tab.valuecolor ?? '#2c3e50'
   }
 })
 
 const stepCheckedStyle = computed(() => {
   return {
-    borderColor: tab.color ?? '#2c3e50'
+    borderColor: tab.valuecolor ?? '#2c3e50'
   }
 })
 const errorStyle = computed(() => {
   return {
-    borderColor: tab.errorColor,
-    backgroundColor: tab.errorColor
+    borderColor: tab.valueerrorColor,
+    backgroundColor: tab.valueerrorColor
   }
 })
 const stepTitleStyle = computed(() => {
-  let isError = tab.validationError
+  let isError = tab.valuevalidationError
 
   return {
-    color: isError ? tab.errorColor : tab.color
+    color: isError ? tab.valueerrorColor : tab.valuecolor
   }
 })
 </script>

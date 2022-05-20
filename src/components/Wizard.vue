@@ -2,7 +2,7 @@
   <div
     :id="id"
     class="fw"
-    :class="[stepSize, { vertical: isVertical, 'wizard-vertical': isVertical }]"
+    :class="[stepSize, { vertical: isVertical, 'fw-vertical': isVertical }]"
   >
     <div v-if="$slots['title']" class="wizard-header">
       <slot name="title">
@@ -20,15 +20,15 @@
           <div class="wizard-progress-bar" />
         </div>
         <ul class="fw-nav fw-nav-pills" role="tablist" :class="stepsClasses">
-          <wizard-step
-            v-for="(tab, index) in tabs.value"
+          <WizardStep
+            v-for="(tab, index) in tabs"
             :key="tab.id"
             :tab="tab"
             :step-size="stepSize"
             :index="index"
             @click="navigateToTab(index)"
           >
-          </wizard-step>
+          </WizardStep>
         </ul>
         <div class="fw-tab-content">
           <div class="fw-tab-container">
@@ -95,22 +95,20 @@ const props = defineProps({
     default: () => [
       {
         id: 0,
-        icon: 'fa fa-pencil',
+
         active: true
       },
       {
-        id: 1,
-        icon: 'fa fa-map'
+        id: 1
       },
       {
-        id: 2,
-        icon: 'fa fa-map'
+        id: 2
       }
     ]
   },
   id: {
     type: String,
-    default: 'f-w-' + new Date().valueOf()
+    default: 'fw-' + new Date().valueOf()
   },
   title: {
     type: String,
