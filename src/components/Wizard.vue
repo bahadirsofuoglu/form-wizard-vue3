@@ -1,7 +1,7 @@
 <template>
   <div
-    :id="id ? id : ''"
-    class="fw-container"
+    :id="id"
+    class="fw"
     :class="[stepSize, { vertical: isVertical, 'wizard-vertical': isVertical }]"
   >
     <div v-if="$slots['title']" class="wizard-header">
@@ -14,70 +14,71 @@
         </p>
       </slot>
     </div>
-
-    <div class="fw-navigation">
-      <div v-if="!isVertical" class="fw-progress-with-circle">
-        <div class="wizard-progress-bar" />
-      </div>
-      <ul class="fw-nav fw-nav-pills" role="tablist" :class="stepsClasses">
-        <wizard-step
-          v-for="(tab, index) in tabs.value"
-          :key="tab.id"
-          :tab="tab"
-          :step-size="stepSize"
-          :index="index"
-          @click="navigateToTab(index)"
-        >
-        </wizard-step>
-      </ul>
-      <div class="fw-tab-content">
-        <div class="fw-tab-container">
-          <slot />
+    <div class="fw-container">
+      <div class="fw-navigation">
+        <div v-if="!isVertical" class="fw-progress-with-circle">
+          <div class="wizard-progress-bar" />
+        </div>
+        <ul class="fw-nav fw-nav-pills" role="tablist" :class="stepsClasses">
+          <wizard-step
+            v-for="(tab, index) in tabs.value"
+            :key="tab.id"
+            :tab="tab"
+            :step-size="stepSize"
+            :index="index"
+            @click="navigateToTab(index)"
+          >
+          </wizard-step>
+        </ul>
+        <div class="fw-tab-content">
+          <div class="fw-tab-container">
+            <slot />
+          </div>
         </div>
       </div>
-    </div>
 
-    <div v-if="!hideButtons" class="fw-card-footer">
-      <slot name="footer">
-        <div class="fw-footer-left">
-          <span v-if="displayPrevTab" role="button" @click="prevTab">
-            <slot name="prev">
-              <button
-                class="fw-btn"
-                :style="fillButtonStyle"
-                :disabled="loading"
-              >
-                {{ backButtonText }}
-              </button>
-            </slot>
-          </span>
-          <slot name="custom-buttons-left" />
-        </div>
+      <div v-if="!hideButtons" class="fw-footer">
+        <slot name="footer">
+          <div class="fw-footer-left">
+            <span v-if="displayPrevTab" role="button" @click="prevTab">
+              <slot name="prev">
+                <button
+                  class="fw-btn back"
+                  :style="fillButtonStyle"
+                  :disabled="loading"
+                >
+                  {{ backButtonText }}
+                </button>
+              </slot>
+            </span>
+            <slot name="custom-buttons-left" />
+          </div>
 
-        <div class="fw-footer-right">
-          <slot name="custom-buttons-right" />
+          <div class="fw-footer-right">
+            <slot name="custom-buttons-right" />
 
-          <span v-if="isLastStep" role="button" @click="nextTab">
-            <slot name="finish">
-              <button class="fw-btn" :style="fillButtonStyle">
-                {{ finishButtonText }}
-              </button>
-            </slot>
-          </span>
+            <span v-if="isLastStep" role="button" @click="nextTab">
+              <slot name="finish">
+                <button class="fw-btn" :style="fillButtonStyle">
+                  {{ finishButtonText }}
+                </button>
+              </slot>
+            </span>
 
-          <span v-else role="button" @click="nextTab">
-            <slot name="next">
-              <button
-                class="fw-btn"
-                :style="fillButtonStyle"
-                :disabled="loading"
-              >
-                {{ nextButtonText }}
-              </button>
-            </slot>
-          </span>
-        </div>
-      </slot>
+            <span v-else role="button" @click="nextTab">
+              <slot name="next">
+                <button
+                  class="fw-btn "
+                  :style="fillButtonStyle"
+                  :disabled="loading"
+                >
+                  {{ nextButtonText }}
+                </button>
+              </slot>
+            </span>
+          </div>
+        </slot>
+      </div>
     </div>
   </div>
 </template>
@@ -175,7 +176,7 @@ const props = defineProps({
 
 const loading = ref(false)
 const maxTabIndex = ref()
-const currentTabIndex = ref()
+let currentTabIndex = ref(0)
 const tabs = ref([])
 
 onMounted(() => {
@@ -205,6 +206,7 @@ const setDefaultValues = () => {
   })
   console.log(tabs)
   maxTabIndex.value = tabs.value.length - 1
+  console.log(props)
   currentTabIndex.value = props.startIndex
 }
 const nextTab = () => {
@@ -219,7 +221,7 @@ const nextTab = () => {
   setActiveIndex()
   props.beforeChange()
 
-  emit('change', currentTabIndex.value)
+  emit('change', currentTabIndex)
 }
 
 const prevTab = () => {
@@ -232,7 +234,7 @@ const prevTab = () => {
   setActiveIndex()
   props.beforeChange()
 
-  emit('change', currentTabIndex.value)
+  emit('change', currentTabIndex)
 }
 
 const setActiveIndex = () => {
@@ -247,7 +249,7 @@ const setActiveIndex = () => {
 }
 
 const completeWizard = () => {
-  emit('completeWizard', currentTabIndex.value)
+  emit('completeWizard', currentTabIndex)
 }
 const navigateToTab = index => {
   if (!navigableTabs) return
