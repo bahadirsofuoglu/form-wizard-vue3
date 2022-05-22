@@ -4,81 +4,65 @@
     class="fw"
     :class="[stepSize, { vertical: isVertical, 'fw-vertical': isVertical }]"
   >
-    <div v-if="$slots['title']" class="wizard-header">
-      <slot name="title">
-        <h4 class="fw-title">
-          {{ title }}
-        </h4>
-        <p class="fw-subtitle">
-          {{ subtitle }}
-        </p>
-      </slot>
+    <div class="fw__body">
+      <ul class="fw__body__list" role="tablist" :class="stepsClasses">
+        <WizardStep
+          v-for="(tab, index) in tabs"
+          :key="tab.id"
+          :tab="tab"
+          :step-size="stepSize"
+          :index="index"
+          @click="navigateToTab(index)"
+        >
+        </WizardStep>
+      </ul>
+      <div class="fw__body__content">
+        <div class="fw__body__container">
+          <slot />
+        </div>
+      </div>
     </div>
-    <div class="fw-container">
-      <div class="fw-navigation">
-        <div v-if="!isVertical" class="fw-progress-with-circle">
-          <div class="wizard-progress-bar" />
+    <div v-if="!hideButtons" class="fw__footer">
+      <slot name="footer">
+        <div class="fw__footer__left">
+          <span v-if="displayPrevTab" role="button" @click="prevTab">
+            <slot name="prev">
+              <button
+                class="fw__btn fw__btn-back"
+                :style="fillButtonStyle"
+                :disabled="loading"
+              >
+                {{ backButtonText }}
+              </button>
+            </slot>
+          </span>
+          <slot name="custom-buttons-left" />
         </div>
-        <ul class="fw-nav fw-nav-pills" role="tablist" :class="stepsClasses">
-          <WizardStep
-            v-for="(tab, index) in tabs"
-            :key="tab.id"
-            :tab="tab"
-            :step-size="stepSize"
-            :index="index"
-            @click="navigateToTab(index)"
-          >
-          </WizardStep>
-        </ul>
-        <div class="fw-tab-content">
-          <div class="fw-tab-container">
-            <slot />
-          </div>
+
+        <div class="fw__footer__right">
+          <slot name="custom-buttons-right" />
+
+          <span v-if="isLastStep" role="button" @click="nextTab">
+            <slot name="finish">
+              <button class="fw__btn" :style="fillButtonStyle">
+                {{ finishButtonText }}
+              </button>
+            </slot>
+          </span>
+
+          <span v-else role="button" @click="nextTab">
+            <slot name="next">
+              <button
+                class="fw__btn"
+                :style="fillButtonStyle"
+                :disabled="loading"
+              >
+                {{ nextButtonText }}
+              </button>
+            </slot>
+          </span>
         </div>
-      </div>
-
-      <div v-if="!hideButtons" class="fw-footer">
-        <slot name="footer">
-          <div class="fw-footer-left">
-            <span v-if="displayPrevTab" role="button" @click="prevTab">
-              <slot name="prev">
-                <button
-                  class="fw-btn back"
-                  :style="fillButtonStyle"
-                  :disabled="loading"
-                >
-                  {{ backButtonText }}
-                </button>
-              </slot>
-            </span>
-            <slot name="custom-buttons-left" />
-          </div>
-
-          <div class="fw-footer-right">
-            <slot name="custom-buttons-right" />
-
-            <span v-if="isLastStep" role="button" @click="nextTab">
-              <slot name="finish">
-                <button class="fw-btn" :style="fillButtonStyle">
-                  {{ finishButtonText }}
-                </button>
-              </slot>
-            </span>
-
-            <span v-else role="button" @click="nextTab">
-              <slot name="next">
-                <button
-                  class="fw-btn "
-                  :style="fillButtonStyle"
-                  :disabled="loading"
-                >
-                  {{ nextButtonText }}
-                </button>
-              </slot>
-            </span>
-          </div>
-        </slot>
-      </div>
+      </slot>
     </div>
   </div>
 </template>
@@ -95,14 +79,16 @@ const props = defineProps({
     default: () => [
       {
         id: 0,
-
-        active: true
+        active: true,
+        checked: false
       },
       {
-        id: 1
+        id: 1,
+        checked: false
       },
       {
-        id: 2
+        id: 2,
+        checked: false
       }
     ]
   },

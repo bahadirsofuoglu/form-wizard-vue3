@@ -1,81 +1,92 @@
 .fw {
   display: flex;
   flex-direction: column;
+
   background: #ffffff;
-
   border: 1px solid #eff0f7;
-  /* Cards/Short Default */
-
   box-shadow: 0px 5px 16px rgba(8, 15, 52, 0.06);
   border-radius: 34px;
-  ul {
-    list-style-type: none !important;
-  }
-  &-nav {
-    margin-top: 0;
-    position: relative;
-    text-align: center;
+
+  &__body {
     display: flex;
-    flex-wrap: wrap;
-
-    li,
-    a {
-      flex: 1;
-      align-items: center;
-      flex-wrap: wrap;
-      flex-grow: 1;
-    }
-    a {
-      display: flex;
-    }
-    > li > a {
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-      margin: 0 auto;
-      color: #6f6c90;
+    flex-direction: column;
+    /*     background: $btn-back-bg;
+    width: 48.89px;
+    height: 48px;
+    border-radius: 50%;
+    color: $white-color; */
+    &__list {
+      margin-top: 0;
       position: relative;
-      top: 3px;
-      &:hover,
-      &:focus {
-        background-color: transparent;
-        color: #6f6c90;
-        outline: 0 !important;
-      }
-      &.disabled {
-        pointer-events: none;
-        cursor: default;
-      }
-    }
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none !important;
 
-    > li.active > a,
-    > li.active > a:hover,
-    > li.active > a:focus {
-      background-color: transparent;
-
-      .fw-icon {
-        color: $white-color;
-        font-size: 24px;
-        display: flex;
+      li,
+      a {
+        flex: 1;
         align-items: center;
-        justify-content: center;
+        flex-wrap: wrap;
+        flex-grow: 1;
       }
-    }
+      a {
+        display: flex;
+      }
+      > li > a {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0 auto;
+        color: #6f6c90;
+        position: relative;
+        top: 3px;
+        &:hover,
+        &:focus {
+          background-color: transparent;
+          color: #6f6c90;
+          outline: 0 !important;
+        }
+        &.disabled {
+          pointer-events: none;
+          cursor: default;
+        }
+      }
 
-    ul li:after {
-      font-size: 13px;
-      color: #88857d;
-      width: 100%;
-      display: block;
+      > li.active > a,
+      > li.active > a:hover,
+      > li.active > a:focus {
+        background-color: transparent;
+
+        .fw-icon {
+          color: $white-color;
+          font-size: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      ul li:after {
+        font-size: 13px;
+        color: #88857d;
+        width: 100%;
+        display: block;
+      }
     }
   }
 
-  &-footer {
+  &-step-active {
+    background: $btn-bg;
+  }
+
+  &__footer {
     display: flex;
     justify-content: space-between;
     padding: 10px;
   }
-  &-btn {
+
+  &__btn {
     padding: 20px 40px 21px;
     background: $btn-bg;
     box-shadow: 0px 3px 12px rgba(74, 58, 255, 0.18);
@@ -91,9 +102,10 @@
 
     text-align: center;
     color: #ffffff;
-  }
-  .back {
-    background: $btn-back-bg !important;
-    border: none;
+
+    &__back {
+      background: $btn-back-bg !important;
+      border: none;
+    }
   }
 }
