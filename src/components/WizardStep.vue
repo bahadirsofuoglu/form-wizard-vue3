@@ -9,14 +9,14 @@
         :aria-controls="tab.tabId"
         :aria-disabled="tab.active"
         :aria-selected="tab.active"
+        :class="[
+          {
+            'fw-step-active': tab.active
+          }
+        ]"
       >
         <div
           class="fw-step-container"
-          :class="[
-            {
-              'fw-step-active': tab.active
-            }
-          ]"
           :style="[tab.valuevalidationError ? errorStyle : {}]"
         >
           <slot name="active-step">
