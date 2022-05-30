@@ -11,33 +11,6 @@
     display: flex;
     flex-direction: column;
 
-    .fw-icon-circle {
-      background: $icon-grey;
-      width: 48.89px;
-      height: 48px;
-      border-radius: 50%;
-      color: $icon-text;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &::after {
-        content: '';
-        width: 40%;
-        background: rgba(55, 235, 235, 0.5);
-        position: absolute;
-        height: 4px;
-        left: 75%;
-        z-index: 2;
-      }
-    }
-
-    li:last-child {
-      .fw-icon-circle:after {
-        display: none;
-      }
-    }
-
     &__list {
       margin-top: 0;
       position: relative;
@@ -46,6 +19,20 @@
       flex-wrap: wrap;
       list-style-type: none !important;
 
+      li {
+        .fw-icon-circle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background: $icon-grey;
+          color: $icon-text;
+
+          width: 48.89px;
+          height: 48px;
+          border-radius: 50%;
+        }
+      }
       li,
       a {
         flex: 1;
@@ -64,35 +51,25 @@
         color: #6f6c90;
         position: relative;
         top: 3px;
-        &:hover,
-        &:focus {
-          background-color: transparent;
-          color: #6f6c90;
-          outline: 0 !important;
-        }
-        &.disabled {
-          pointer-events: none;
-          cursor: default;
+      }
+      li:last-child {
+        .fw-step-progress {
+          display: none;
         }
       }
-
-      > li.active > a,
-      > li.active > a:hover,
-      > li.active > a:focus {
-        background-color: transparent;
-
-        .fw-icon-circle {
-          background: $btn-bg;
-          color: $white-color;
-        }
-      }
-
-      ul li:after {
-        font-size: 13px;
-        color: #88857d;
-        width: 100%;
-        display: block;
-      }
+    }
+  }
+  &-step-progress {
+    width: 140px;
+    height: 8px;
+    position: absolute;
+    right: -70px;
+    z-index: 2;
+    background: #eff0f7;
+    border-radius: 40px;
+    top: 50%;
+    &-active {
+      background: $btn-bg;
     }
   }
 
