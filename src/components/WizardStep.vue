@@ -1,14 +1,10 @@
 <template>
   <li>
-    <a>
+    <div class="fw_list_wrapper">
       <div
         :id="`step-${tab.tabId}`"
-        class="fw-icon-circle md"
+        class="fw-icon-circle"
         role="tab"
-        :tabindex="tab.checked ? 0 : ''"
-        :aria-controls="tab.tabId"
-        :aria-disabled="tab.active"
-        :aria-selected="tab.active"
         :class="[
           {
             'fw-step-active': tab.active
@@ -29,7 +25,7 @@
         class="fw-step-progress"
         :class="[
           {
-            'fw-step-progress-active': tab.active
+            'fw-step-progress-active': progressActive
           }
         ]"
       />
@@ -45,7 +41,7 @@
           {{ tab.title }}
         </span>
       </slot>
-    </a>
+    </div>
   </li>
 </template>
 <script setup>
@@ -58,10 +54,17 @@ const props = defineProps({
   index: {
     type: Number,
     default: 0
+  },
+  currentIndex: {
+    type: Number
   }
 })
 
+const progressActive = computed(() => {
+  return props.currentIndex === props.index + 1
+})
+
 onMounted(() => {
-  console.log(props.tab.active)
+  console.log(props.currentIndex === props.index + 1)
 })
 </script>

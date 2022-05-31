@@ -12,6 +12,7 @@
           :tab="tab"
           :step-size="stepSize"
           :index="index"
+          :currentIndex="currentTabIndex"
           @click="navigateToTab(index)"
         >
         </WizardStep>
@@ -80,15 +81,18 @@ const props = defineProps({
       {
         id: 0,
         active: true,
-        checked: false
+        checked: false,
+        title: 'Step 1'
       },
       {
         id: 1,
-        checked: false
+        checked: false,
+        title: 'Step 2'
       },
       {
         id: 2,
-        checked: false
+        checked: false,
+        title: 'Step 3'
       }
     ]
   },

@@ -20,6 +20,8 @@
       list-style-type: none !important;
 
       li {
+        border-bottom: 1px solid #d9dbe9;
+        padding: 1.5rem;
         .fw-icon-circle {
           display: flex;
           align-items: center;
@@ -34,16 +36,16 @@
         }
       }
       li,
-      a {
+      .fw_list_wrapper {
         flex: 1;
         align-items: center;
         flex-wrap: wrap;
         flex-grow: 1;
       }
-      a {
+      .fw_list_wrapper {
         display: flex;
       }
-      > li > a {
+      > li > .fw_list_wrapper {
         display: flex;
         flex-direction: column;
         padding: 0;
@@ -68,8 +70,9 @@
     background: #eff0f7;
     border-radius: 40px;
     top: 50%;
+
     &-active {
-      background: $btn-bg;
+      background: $progress-active;
     }
   }
 
