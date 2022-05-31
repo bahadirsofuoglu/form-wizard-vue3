@@ -2,7 +2,7 @@
   <li>
     <div class="fw_list_wrapper">
       <div
-        :id="`step-${tab.tabId}`"
+        :id="`step-${tab.id}`"
         class="fw-icon-circle"
         role="tab"
         :class="[
@@ -11,10 +11,7 @@
           }
         ]"
       >
-        <div
-          class="fw-step-container"
-          :style="[tab.valuevalidationError ? errorStyle : {}]"
-        >
+        <div class="fw-step-container">
           <slot name="active-step">
             <i v-if="props.tab.icon" :icon="props.tab.icon" class="fw-icon"></i>
             <i v-else class="fw-icon">{{ index + 1 }}</i>
@@ -33,8 +30,7 @@
         <span
           class="stepTitle"
           :class="{
-            active: tab.active,
-            has_error: tab.valuevalidationError
+            active: tab.active
           }"
           :style="tab.active ? stepTitleStyle : {}"
         >

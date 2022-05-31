@@ -20,7 +20,6 @@
       list-style-type: none !important;
 
       li {
-        border-bottom: 1px solid #d9dbe9;
         padding: 1.5rem;
         .fw-icon-circle {
           display: flex;
@@ -107,6 +106,27 @@
     &-back {
       background: $btn-back-bg !important;
       border: none;
+    }
+  }
+  &-vertical {
+    flex-direction: row;
+
+    .fw__body__content {
+      padding: 60px;
+      width: 100%;
+    }
+    ul {
+      flex-direction: column;
+
+      li {
+        padding: 60px 0;
+      }
+      .fw-step-progress {
+        width: 8px;
+        height: 60px;
+        right: 20px;
+        top: 120px;
+      }
     }
   }
 }

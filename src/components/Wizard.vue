@@ -1,16 +1,11 @@
 <template>
-  <div
-    :id="id"
-    class="fw"
-    :class="[stepSize, { vertical: isVertical, 'fw-vertical': isVertical }]"
-  >
-    <div class="fw__body">
-      <ul class="fw__body__list" role="tablist" :class="stepsClasses">
+  <div :id="id" class="fw">
+    <div class="fw__body" :class="[{ 'fw-vertical': isVertical }]">
+      <ul class="fw__body__list" role="tablist">
         <WizardStep
           v-for="(tab, index) in tabs"
           :key="tab.id"
           :tab="tab"
-          :step-size="stepSize"
           :index="index"
           :currentIndex="currentTabIndex"
           @click="navigateToTab(index)"
@@ -28,11 +23,7 @@
         <div class="fw__footer__left">
           <span v-if="displayPrevTab" role="button" @click="prevTab">
             <slot name="prev">
-              <button
-                class="fw__btn fw__btn-back"
-                :style="fillButtonStyle"
-                :disabled="loading"
-              >
+              <button class="fw__btn fw__btn-back" :disabled="loading">
                 {{ backButtonText }}
               </button>
             </slot>
@@ -45,7 +36,7 @@
 
           <span v-if="isLastStep" role="button" @click="nextTab">
             <slot name="finish">
-              <button class="fw__btn" :style="fillButtonStyle">
+              <button class="fw__btn">
                 {{ finishButtonText }}
               </button>
             </slot>
@@ -53,11 +44,7 @@
 
           <span v-else role="button" @click="nextTab">
             <slot name="next">
-              <button
-                class="fw__btn"
-                :style="fillButtonStyle"
-                :disabled="loading"
-              >
+              <button class="fw__btn" :disabled="loading">
                 {{ nextButtonText }}
               </button>
             </slot>
@@ -104,10 +91,6 @@ const props = defineProps({
     type: String,
     default: 'Awesome Wizard'
   },
-  subtitle: {
-    type: String,
-    default: 'Split a complicated flow in multiple steps'
-  },
   nextButtonText: {
     type: String,
     default: 'Next'
@@ -127,19 +110,6 @@ const props = defineProps({
   color: {
     type: String,
     default: '#e74c3c'
-  },
-  stepsClasses: {
-    type: [String, Array],
-    default: ''
-  },
-  stepSize: {
-    type: String,
-    default: 'md',
-    validator: value => {
-      let acceptedValues = ['xs', 'sm', 'md', 'lg']
-
-      return acceptedValues.indexOf(value) !== -1
-    }
   },
   startIndex: {
     type: Number,
@@ -174,13 +144,7 @@ onMounted(() => {
 const displayPrevTab = computed(() => {
   return currentTabIndex.value !== 0
 })
-const fillButtonStyle = computed(() => {
-  return {
-    backgroundColor: props.color,
-    borderColor: props.color,
-    color: 'white'
-  }
-})
+
 const isLastStep = computed(() => {
   return currentTabIndex.value === maxTabIndex.value
 })
