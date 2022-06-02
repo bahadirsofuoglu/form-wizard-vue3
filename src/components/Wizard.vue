@@ -1,56 +1,56 @@
 <template>
-  <div :id="id" class="fw">
-    <div class="fw__body" :class="[{ 'fw-vertical': isVertical }]">
-      <ul class="fw__body__list" role="tablist">
-        <WizardStep
-          v-for="(tab, index) in tabs"
-          :key="tab.id"
-          :tab="tab"
-          :index="index"
-          :currentIndex="currentTabIndex"
-          @click="navigateToTab(index)"
-        >
-        </WizardStep>
-      </ul>
+  <div :id="id" class="fw" :class="[{ 'fw-vertical': isVertical }]">
+    <ul class="fw__body__list" role="tablist">
+      <WizardStep
+        v-for="(tab, index) in tabs"
+        :key="tab.id"
+        :tab="tab"
+        :index="index"
+        :currentIndex="currentTabIndex"
+        @click="navigateToTab(index)"
+      >
+      </WizardStep>
+    </ul>
+    <div class="fw__body">
       <div class="fw__body__content">
         <div class="fw__body__container">
           <slot />
         </div>
       </div>
-    </div>
-    <div v-if="!hideButtons" class="fw__footer">
-      <slot name="footer">
-        <div class="fw__footer__left">
-          <span v-if="displayPrevTab" role="button" @click="prevTab">
-            <slot name="prev">
-              <button class="fw__btn fw__btn-back" :disabled="loading">
-                {{ backButtonText }}
-              </button>
-            </slot>
-          </span>
-          <slot name="custom-buttons-left" />
-        </div>
+      <div v-if="!hideButtons" class="fw__footer">
+        <slot name="footer">
+          <div class="fw__footer__left">
+            <span v-if="displayPrevTab" role="button" @click="prevTab">
+              <slot name="prev">
+                <button class="fw__btn fw__btn-back" :disabled="loading">
+                  {{ backButtonText }}
+                </button>
+              </slot>
+            </span>
+            <slot name="custom-buttons-left" />
+          </div>
 
-        <div class="fw__footer__right">
-          <slot name="custom-buttons-right" />
+          <div class="fw__footer__right">
+            <slot name="custom-buttons-right" />
 
-          <span v-if="isLastStep" role="button" @click="nextTab">
-            <slot name="finish">
-              <button class="fw__btn">
-                {{ finishButtonText }}
-              </button>
-            </slot>
-          </span>
+            <span v-if="isLastStep" role="button" @click="nextTab">
+              <slot name="finish">
+                <button class="fw__btn">
+                  {{ finishButtonText }}
+                </button>
+              </slot>
+            </span>
 
-          <span v-else role="button" @click="nextTab">
-            <slot name="next">
-              <button class="fw__btn" :disabled="loading">
-                {{ nextButtonText }}
-              </button>
-            </slot>
-          </span>
-        </div>
-      </slot>
+            <span v-else role="button" @click="nextTab">
+              <slot name="next">
+                <button class="fw__btn" :disabled="loading">
+                  {{ nextButtonText }}
+                </button>
+              </slot>
+            </span>
+          </div>
+        </slot>
+      </div>
     </div>
   </div>
 </template>
@@ -75,21 +75,6 @@ const props = defineProps({
         id: 1,
         checked: false,
         title: 'Step 2'
-      },
-      {
-        id: 2,
-        checked: false,
-        title: 'Step 3'
-      },
-      {
-        id: 1,
-        checked: false,
-        title: 'Step 2'
-      },
-      {
-        id: 2,
-        checked: false,
-        title: 'Step 3'
       }
     ]
   },

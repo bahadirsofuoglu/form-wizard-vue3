@@ -111,9 +111,14 @@
   &-vertical {
     flex-direction: row;
 
+    .fw__body {
+      flex-direction: column;
+      flex: 1 1;
+    }
     .fw__body__content {
       padding: 60px;
       width: 100%;
+      flex: 20 1;
     }
     ul {
       flex-direction: column;
