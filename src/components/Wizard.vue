@@ -80,6 +80,16 @@ const props = defineProps({
         id: 2,
         checked: false,
         title: 'Step 3'
+      },
+      {
+        id: 1,
+        checked: false,
+        title: 'Step 2'
+      },
+      {
+        id: 2,
+        checked: false,
+        title: 'Step 3'
       }
     ]
   },
