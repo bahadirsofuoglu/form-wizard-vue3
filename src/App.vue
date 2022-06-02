@@ -12,7 +12,7 @@ const test = value => {
 </script>
 
 <template>
-  <Wizard @change="test" title="adfas">
+  <Wizard navigable-tabs @change="test" title="adfas">
     <div v-if="currentTab.value === 0">
       <h1>Hello</h1>
       <h1>Hello</h1>

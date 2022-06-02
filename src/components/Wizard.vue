@@ -87,10 +87,6 @@ const props = defineProps({
     type: String,
     default: 'fw-' + new Date().valueOf()
   },
-  title: {
-    type: String,
-    default: 'Awesome Wizard'
-  },
   nextButtonText: {
     type: String,
     default: 'Next'
@@ -156,9 +152,8 @@ const setDefaultValues = () => {
       active: tab.active || false
     }
   })
-  console.log(tabs)
+
   maxTabIndex.value = tabs.value.length - 1
-  console.log(props)
   currentTabIndex.value = props.startIndex
 }
 const nextTab = () => {
@@ -203,10 +198,12 @@ const setActiveIndex = () => {
 const completeWizard = () => {
   emit('completeWizard', currentTabIndex)
 }
-const navigateToTab = index => {
-  if (!navigableTabs) return
 
-  currentTabIndex = index
+const navigateToTab = index => {
+  debugger
+  if (!props.navigableTabs) return
+
+  currentTabIndex.value = index
 
   setActiveIndex()
 }
