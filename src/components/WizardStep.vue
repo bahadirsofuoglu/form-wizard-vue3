@@ -18,14 +18,6 @@
           </slot>
         </div>
       </div>
-      <div
-        class="fw-step-progress"
-        :class="[
-          {
-            'fw-step-progress-active': progressActive
-          }
-        ]"
-      />
       <slot name="title">
         <span
           class="stepTitle"
