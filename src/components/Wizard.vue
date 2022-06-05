@@ -22,7 +22,7 @@
           <div class="fw__footer__left">
             <span v-if="displayPrevTab" role="button" @click="prevTab">
               <slot name="prev">
-                <button class="fw__btn fw__btn-back" :disabled="loading">
+                <button class="fw__btn fw__btn-back">
                   {{ backButtonText }}
                 </button>
               </slot>
@@ -43,7 +43,7 @@
 
             <span v-else role="button" @click="nextTab">
               <slot name="next">
-                <button class="fw__btn" :disabled="loading">
+                <button class="fw__btn">
                   {{ nextButtonText }}
                 </button>
               </slot>
@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import WizardStep from './WizardStep.vue'
 
 const emit = defineEmits(['change', 'completeWizard'])
@@ -70,6 +70,11 @@ const props = defineProps({
         active: true,
         checked: false,
         title: 'Step 1'
+      },
+      {
+        id: 1,
+        checked: false,
+        title: 'Step 2'
       },
       {
         id: 1,
@@ -98,10 +103,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  color: {
-    type: String,
-    default: '#e74c3c'
-  },
   startIndex: {
     type: Number,
     default: 0,
@@ -123,42 +124,41 @@ const props = defineProps({
   }
 })
 
-const loading = ref(false)
-const maxTabIndex = ref()
-let currentTabIndex = ref(0)
-const tabs = ref([])
+let maxTabIndex = $ref()
+let currentTabIndex = $ref(0)
+let tabs = $ref([])
 
 onMounted(() => {
   setDefaultValues()
 })
 
 const displayPrevTab = computed(() => {
-  return currentTabIndex.value !== 0
+  return currentTabIndex !== 0
 })
 
 const isLastStep = computed(() => {
-  return currentTabIndex.value === maxTabIndex.value
+  return currentTabIndex === maxTabIndex
 })
 
 const setDefaultValues = () => {
-  tabs.value = props.customTabs.map(tab => {
+  tabs = props.customTabs.map(tab => {
     return {
       ...tab,
       active: tab.active || false
     }
   })
 
-  maxTabIndex.value = tabs.value.length - 1
-  currentTabIndex.value = props.startIndex
+  maxTabIndex = tabs.length - 1
+  currentTabIndex = props.startIndex
 }
 const nextTab = () => {
-  if (currentTabIndex.value === maxTabIndex.value) {
+  if (currentTabIndex === maxTabIndex) {
     completeWizard()
 
     return
   }
 
-  currentTabIndex.value = currentTabIndex.value + 1
+  currentTabIndex = currentTabIndex + 1
 
   setActiveIndex()
   props.beforeChange()
@@ -167,11 +167,11 @@ const nextTab = () => {
 }
 
 const prevTab = () => {
-  if (currentTabIndex.value === 0) {
+  if (currentTabIndex === 0) {
     return
   }
 
-  currentTabIndex.value = currentTabIndex.value - 1
+  currentTabIndex = currentTabIndex - 1
 
   setActiveIndex()
   props.beforeChange()
@@ -180,14 +180,14 @@ const prevTab = () => {
 }
 
 const setActiveIndex = () => {
-  tabs.value = tabs.value.map(tab => {
+  tabs = tabs.map(tab => {
     return {
       ...tab,
       active: false
     }
   })
 
-  tabs.value[currentTabIndex.value].active = true
+  tabs[currentTabIndex].active = true
 }
 
 const completeWizard = () => {
@@ -198,7 +198,7 @@ const navigateToTab = index => {
   debugger
   if (!props.navigableTabs) return
 
-  currentTabIndex.value = index
+  currentTabIndex = index
 
   setActiveIndex()
 }

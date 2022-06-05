@@ -4,7 +4,7 @@
 import Wizard from './components/Wizard.vue'
 import WizardStep from './components/WizardStep.vue'
 import { ref } from 'vue'
-const currentTab = ref(0)
+const currentTab = ref(1)
 const test = value => {
   currentTab.value = value
   console.log(currentTab.value)
@@ -13,7 +13,7 @@ const test = value => {
 
 <template>
   <Wizard navigable-tabs is-vertical @change="test" title="adfas">
-    <div v-if="currentTab.value === 0">
+    <div v-if="currentTab === 0">
       <h1>Hello</h1>
       <h1>Hello</h1>
       <h1>Hello</h1>
@@ -23,7 +23,7 @@ const test = value => {
 
       <h1>Hello</h1>
     </div>
-    <div v-if="currentTab.value === 1">
+    <div v-if="currentTab === 1">
       <button>Hello</button>
       <button>test</button>
     </div>

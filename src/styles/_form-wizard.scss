@@ -61,14 +61,14 @@
     }
   }
   &-step-progress {
-    width: 140px;
+    width: 70px;
     height: 8px;
     position: absolute;
-    right: -70px;
+    right: -50px;
     z-index: 2;
     background: #eff0f7;
     border-radius: 40px;
-    top: 50%;
+    top: 30%;
 
     &-active {
       background: $progress-active;

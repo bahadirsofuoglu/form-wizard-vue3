@@ -32,7 +32,6 @@
           :class="{
             active: tab.active
           }"
-          :style="tab.active ? stepTitleStyle : {}"
         >
           {{ tab.title }}
         </span>
