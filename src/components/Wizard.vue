@@ -55,10 +55,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, computed } from 'vue'
 import WizardStep from './WizardStep.vue'
-
+type Tab = {
+  id?: number
+  title?: string
+  active?: boolean
+}
 const emit = defineEmits(['change', 'completeWizard'])
 
 const props = defineProps({
@@ -68,17 +72,14 @@ const props = defineProps({
       {
         id: 0,
         active: true,
-        checked: false,
         title: 'Step 1'
       },
       {
         id: 1,
-        checked: false,
         title: 'Step 2'
       },
       {
-        id: 1,
-        checked: false,
+        id: 2,
         title: 'Step 2'
       }
     ]
@@ -106,7 +107,7 @@ const props = defineProps({
   startIndex: {
     type: Number,
     default: 0,
-    validator: value => {
+    validator: (value: number) => {
       return value >= 0
     }
   },
@@ -124,9 +125,9 @@ const props = defineProps({
   }
 })
 
-let maxTabIndex = $ref()
+let maxTabIndex: number = $ref()
 let currentTabIndex = $ref(0)
-let tabs = $ref([])
+let tabs: Tab[] = $ref([])
 
 onMounted(() => {
   setDefaultValues()
@@ -141,7 +142,7 @@ const isLastStep = computed(() => {
 })
 
 const setDefaultValues = () => {
-  tabs = props.customTabs.map(tab => {
+  tabs = props.customTabs.map((tab: any) => {
     return {
       ...tab,
       active: tab.active || false
@@ -194,8 +195,7 @@ const completeWizard = () => {
   emit('completeWizard', currentTabIndex)
 }
 
-const navigateToTab = index => {
-  debugger
+const navigateToTab = (index: number) => {
   if (!props.navigableTabs) return
 
   currentTabIndex = index

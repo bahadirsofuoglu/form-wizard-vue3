@@ -27,6 +27,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          cursor: pointer;
 
           background: $icon-grey;
           color: $icon-text;
@@ -126,8 +127,9 @@
     background: $btn-bg;
     box-shadow: 0px 3px 12px rgba(74, 58, 255, 0.18);
     border-radius: 56px;
-    gap: 8px;
+
     border: none;
+    cursor: pointer;
 
     font-family: 'DM Sans';
     font-style: normal;

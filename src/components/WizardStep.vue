@@ -35,7 +35,7 @@
     </div>
   </li>
 </template>
-<script setup>
+<script setup lang="ts">
 import { onMounted, computed } from 'vue'
 const props = defineProps({
   tab: {
@@ -47,7 +47,8 @@ const props = defineProps({
     default: 0
   },
   currentIndex: {
-    type: Number
+    type: Number,
+    default: 0
   }
 })
 
