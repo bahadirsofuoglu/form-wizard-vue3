@@ -17,8 +17,8 @@
       >
         <div class="fw-step-container">
           <slot name="active-step">
-            <i v-if="props.tab.icon" :icon="props.tab.icon" class="fw-icon"></i>
-            <i v-else class="fw-icon">{{ index + 1 }}</i>
+            <i v-if="props.tab.icon" :class="iconClass"></i>
+            <i v-else>{{ index + 1 }}</i>
           </slot>
         </div>
       </div>
@@ -36,7 +36,8 @@
   </li>
 </template>
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { computed } from 'vue'
+
 const props = defineProps({
   tab: {
     type: Object,
@@ -52,11 +53,6 @@ const props = defineProps({
   }
 })
 
-const progressActive = computed(() => {
-  return props.currentIndex > props.index
-})
-
-onMounted(() => {
-  console.log(props.currentIndex === props.index + 1)
-})
+const progressActive = computed(() => props.currentIndex > props.index)
+const iconClass = computed(() => `bi bi-${props.tab.icon}`)
 </script>

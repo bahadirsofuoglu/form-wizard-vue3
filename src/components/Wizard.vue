@@ -62,6 +62,7 @@ type Tab = {
   id?: number
   title?: string
   active?: boolean
+  icon?: string
 }
 const emit = defineEmits(['change', 'completeWizard'])
 
@@ -72,15 +73,18 @@ const props = defineProps({
       {
         id: 0,
         active: true,
-        title: 'Step 1'
+        title: 'Step 1',
+        icon: 'map'
       },
       {
         id: 1,
-        title: 'Step 2'
+        title: 'Step 2',
+        icon: 'check'
       },
       {
         id: 2,
-        title: 'Step 2'
+        title: 'Step 2',
+        icon: 'pen'
       }
     ]
   },
@@ -152,6 +156,7 @@ const setDefaultValues = () => {
   maxTabIndex = tabs.length - 1
   currentTabIndex = props.startIndex
 }
+
 const nextTab = () => {
   if (currentTabIndex === maxTabIndex) {
     completeWizard()
