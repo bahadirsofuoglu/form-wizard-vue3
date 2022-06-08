@@ -23,7 +23,7 @@
       li {
         position: relative;
         padding: 1.5rem;
-        .fw-icon-circle {
+        .fw_list_wrapper_icon {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -110,7 +110,7 @@
     }
   }
 
-  &-step-active {
+  &_step-active {
     background: $btn-bg !important;
     color: $white-color !important;
   }

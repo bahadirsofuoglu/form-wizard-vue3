@@ -7,11 +7,11 @@
     <div class="fw_list_wrapper">
       <div
         :id="`step-${tab.id}`"
-        class="fw-icon-circle"
+        class="fw_list_wrapper_icon"
         role="tab"
         :class="[
           {
-            'fw-step-active': tab.active
+            'fw_step-active': tab.active
           }
         ]"
       >
@@ -24,7 +24,7 @@
       </div>
       <slot name="title">
         <span
-          class="stepTitle"
+          class="fw_step_title"
           :class="{
             active: tab.active
           }"
