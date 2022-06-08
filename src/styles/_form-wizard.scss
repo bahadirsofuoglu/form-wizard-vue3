@@ -45,12 +45,7 @@
         left: 80%;
       }
       .fw_list_progress-active {
-        position: absolute;
-        width: 40%;
-        height: 8.47px;
-        background: $btn-bg;
-        top: 40%;
-        left: 80%;
+        background: $progress-active;
       }
       li:last-child {
         .fw_list_progress {
@@ -163,10 +158,41 @@
     }
     ul {
       flex-direction: column;
-
+      overflow-x: hidden !important;
       li {
         padding: 60px 0;
+        .fw_list_progress {
+          position: absolute;
+          width: 8px;
+          height: 40%;
+          background: #eff0f7;
+          top: 80%;
+          left: 45%;
+        }
+        .fw_list_progress-active {
+          background: $progress-active;
+        }
       }
+    }
+    ul:hover {
+      overflow-y: scroll;
+    }
+    ul::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+      background-color: $btn-bg;
+    }
+
+    ul::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      background-color: $btn-bg;
+    }
+
+    ul::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: $btn-bg;
     }
   }
 }
