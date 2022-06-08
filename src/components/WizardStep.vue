@@ -1,5 +1,9 @@
 <template>
   <li>
+    <div
+      class="fw_list_progress"
+      :class="{ 'fw_list_progress-active': progressActive }"
+    ></div>
     <div class="fw_list_wrapper">
       <div
         :id="`step-${tab.id}`"
@@ -48,7 +52,7 @@ const props = defineProps({
 })
 
 const progressActive = computed(() => {
-  return props.currentIndex === props.index + 1
+  return props.currentIndex > props.index
 })
 
 onMounted(() => {

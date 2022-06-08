@@ -110,21 +110,6 @@ const props = defineProps({
         id: 1,
         checked: false,
         title: 'Step 2'
-      },
-      {
-        id: 1,
-        checked: false,
-        title: 'Step 2'
-      },
-      {
-        id: 1,
-        checked: false,
-        title: 'Step 2'
-      },
-      {
-        id: 1,
-        checked: false,
-        title: 'Step 2'
       }
     ]
   },

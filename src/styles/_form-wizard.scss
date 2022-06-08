@@ -21,6 +21,7 @@
       padding: 10px;
 
       li {
+        position: relative;
         padding: 1.5rem;
         .fw-icon-circle {
           display: flex;
@@ -35,6 +36,28 @@
           border-radius: 50%;
         }
       }
+      .fw_list_progress {
+        position: absolute;
+        width: 40%;
+        height: 8.47px;
+        background: #eff0f7;
+        top: 40%;
+        left: 80%;
+      }
+      .fw_list_progress-active {
+        position: absolute;
+        width: 40%;
+        height: 8.47px;
+        background: $btn-bg;
+        top: 40%;
+        left: 80%;
+      }
+      li:last-child {
+        .fw_list_progress {
+          width: 0%;
+        }
+      }
+
       li,
       .fw_list_wrapper {
         flex: 1;
@@ -55,6 +78,7 @@
         top: 3px;
       }
     }
+
     &__list:hover {
       overflow-x: scroll;
     }
