@@ -58,12 +58,14 @@
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
 import WizardStep from './WizardStep.vue'
+
 type Tab = {
   id?: number
   title?: string
   active?: boolean
   icon?: string
 }
+
 const emit = defineEmits(['change', 'completeWizard'])
 
 const props = defineProps({
@@ -80,11 +82,6 @@ const props = defineProps({
         id: 1,
         title: 'Step 2',
         icon: 'check'
-      },
-      {
-        id: 2,
-        title: 'Step 2',
-        icon: 'pen'
       }
     ]
   },
@@ -146,15 +143,13 @@ const isLastStep = computed(() => {
 })
 
 const setDefaultValues = () => {
-  tabs = props.customTabs.map((tab: any) => {
-    return {
-      ...tab,
-      active: tab.active || false
-    }
-  })
+  tabs = props.customTabs as Tab[]
 
   maxTabIndex = tabs.length - 1
   currentTabIndex = props.startIndex
+
+  setActiveIndex()
+  emit('change', currentTabIndex)
 }
 
 const nextTab = () => {
@@ -180,20 +175,19 @@ const prevTab = () => {
   currentTabIndex = currentTabIndex - 1
 
   setActiveIndex()
+
   props.beforeChange()
 
   emit('change', currentTabIndex)
 }
 
 const setActiveIndex = () => {
-  tabs = tabs.map(tab => {
-    return {
-      ...tab,
-      active: false
+  for (const [index, tab] of tabs.entries()) {
+    if (index === maxTabIndex + 1) {
+      return
     }
-  })
-
-  tabs[currentTabIndex].active = true
+    tab.active = index <= currentTabIndex
+  }
 }
 
 const completeWizard = () => {

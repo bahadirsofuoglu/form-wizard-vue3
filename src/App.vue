@@ -4,15 +4,28 @@
 import Wizard from './components/Wizard.vue'
 import WizardStep from './components/WizardStep.vue'
 import { ref } from 'vue'
-const currentTab = ref(1)
-const test = value => {
-  currentTab.value = value
+const currentTab = ref(0)
+const test = i => {
+  currentTab.value = i
   console.log(currentTab.value)
+}
+const beforeChange = () => {
+  if (currentTab.value === 0) {
+    console.log('test-0')
+  } else if (currentTab.value === 1) {
+    console.log('test-1')
+  }
 }
 </script>
 
 <template>
-  <Wizard navigable-tabs @change="test" title="adfas">
+  <Wizard
+    navigable-tabs
+    @change="test"
+    title="adfas"
+    :before-change="beforeChange"
+    :start-index="1"
+  >
     <div v-if="currentTab === 0">
       <h1>Hello</h1>
       <h1>Hello</h1>

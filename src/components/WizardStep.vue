@@ -15,7 +15,7 @@
           }
         ]"
       >
-        <div class="fw-step-container">
+        <div class="fw_step_container">
           <slot name="active-step">
             <i v-if="props.tab.icon" :class="iconClass"></i>
             <i v-else>{{ index + 1 }}</i>
