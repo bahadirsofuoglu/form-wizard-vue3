@@ -5,7 +5,9 @@ import Wizard from '../src/components/Wizard.vue'
 
 let wrapper
 
-wrapper = mount(Wizard)
+beforeEach(() => {
+  wrapper = mount(Wizard)
+})
 
 describe('Wizard unit tests', () => {
   test('displayPrevTab should be false when component mount', () => {
@@ -15,14 +17,6 @@ describe('Wizard unit tests', () => {
   test('isLastStep should be false when component mount', () => {
     expect(wrapper.vm.isLastStep).toBe(false)
   })
-
-  /*   test('isLastStep should be false when component mount', () => {
-    const spySetDefaultValues = vi
-      .spyOn(wrapper.vm, 'setDefaultValues')
-      .mockImplementation()
-
-    expect(spySetDefaultValues).toHaveBeenCalled()
-  }) */
 
   test('setDefaulValues method testing', async () => {
     await wrapper.vm.setDefaultValues()
