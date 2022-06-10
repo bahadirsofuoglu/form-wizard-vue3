@@ -1,6 +1,6 @@
 <template>
   <div :id="id" class="fw" :class="[{ 'fw-vertical': isVertical }]">
-    <ul class="fw__body__list" role="tablist">
+    <ul class="fw-body-list" role="tablist">
       <WizardStep
         v-for="(tab, index) in tabs"
         :key="tab.id"
@@ -11,18 +11,18 @@
       >
       </WizardStep>
     </ul>
-    <div class="fw__body">
-      <div class="fw__body__content">
-        <div class="fw__body__container">
+    <div class="fw-body">
+      <div class="fw-body-content">
+        <div class="fw-body-container">
           <slot />
         </div>
       </div>
-      <div v-if="!hideButtons" class="fw__footer">
+      <div v-if="!hideButtons" class="fw-footer">
         <slot name="footer">
-          <div class="fw__footer__left">
+          <div class="fw-footer-left">
             <span v-if="displayPrevTab" role="button" @click="prevTab">
               <slot name="prev">
-                <button class="fw__btn fw__btn-back">
+                <button class="fw-btn fw-btn-back">
                   {{ backButtonText }}
                 </button>
               </slot>
@@ -30,12 +30,12 @@
             <slot name="custom-buttons-left" />
           </div>
 
-          <div class="fw__footer__right">
+          <div class="fw-footer-right">
             <slot name="custom-buttons-right" />
 
             <span v-if="isLastStep" role="button" @click="nextTab">
               <slot name="finish">
-                <button class="fw__btn">
+                <button class="fw-btn">
                   {{ finishButtonText }}
                 </button>
               </slot>
@@ -43,7 +43,7 @@
 
             <span v-else role="button" @click="nextTab">
               <slot name="next">
-                <button class="fw__btn">
+                <button class="fw-btn">
                   {{ nextButtonText }}
                 </button>
               </slot>

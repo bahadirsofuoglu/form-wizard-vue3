@@ -1,21 +1,21 @@
 <template>
   <li>
     <div
-      class="fw_list_progress"
-      :class="{ 'fw_list_progress-active': progressActive }"
+      class="fw-list-progress"
+      :class="{ 'fw-list-progress-active': progressActive }"
     ></div>
-    <div class="fw_list_wrapper">
+    <div class="fw-list-wrapper">
       <div
         :id="`step-${tab.id}`"
-        class="fw_list_wrapper_icon"
+        class="fw-list-wrapper-icon"
         role="tab"
         :class="[
           {
-            'fw_step-active': tab.active
+            'fw-step-active': tab.active
           }
         ]"
       >
-        <div class="fw_step_container">
+        <div class="fw-step-container">
           <slot name="active-step">
             <i v-if="props.tab.icon" :class="iconClass"></i>
             <i v-else>{{ index + 1 }}</i>
@@ -24,7 +24,7 @@
       </div>
       <slot name="title">
         <span
-          class="fw_step_title"
+          class="fw-step-title"
           :class="{
             active: tab.active
           }"
