@@ -1,5 +1,9 @@
 <template>
-  <div :id="id" class="fw" :class="[{ 'fw-vertical': isVertical }]">
+  <div
+    :id="id"
+    class="form-wizard-vue"
+    :class="[{ 'fw-vertical': isVertical }]"
+  >
     <ul class="fw-body-list" role="tablist">
       <WizardStep
         v-for="(tab, index) in tabs"
