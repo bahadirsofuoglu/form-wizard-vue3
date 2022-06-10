@@ -5,7 +5,7 @@
     :class="[{ 'fw-vertical': isVertical }]"
   >
     <ul class="fw-body-list" role="tablist">
-      <WizardStep
+      <wizard-step
         v-for="(tab, index) in tabs"
         :key="tab.id"
         :tab="tab"
@@ -13,7 +13,7 @@
         :currentIndex="currentTabIndex"
         @click="navigateToTab(index)"
       >
-      </WizardStep>
+      </wizard-step>
     </ul>
     <div class="fw-body">
       <div class="fw-body-content">
@@ -66,8 +66,8 @@ import WizardStep from './WizardStep.vue'
 type Tab = {
   id?: number
   title?: string
-  active?: boolean
   icon?: string
+  active?: boolean
 }
 
 const emit = defineEmits(['change', 'completeWizard'])
@@ -78,7 +78,6 @@ const props = defineProps({
     default: () => [
       {
         id: 0,
-        active: true,
         title: 'Step 1',
         icon: 'map'
       },
@@ -153,6 +152,7 @@ const setDefaultValues = () => {
   currentTabIndex = props.startIndex
 
   setActiveIndex()
+
   emit('change', currentTabIndex)
 }
 

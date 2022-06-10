@@ -1,4 +1,4 @@
-import path from 'path'
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -8,5 +8,13 @@ export default defineConfig({
     vue({
       reactivityTransform: true
     })
-  ]
+  ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    coverage: {
+      include: ['src/**/*.vue'],
+      reporter: ['text', 'html', 'lcov']
+    }
+  }
 })

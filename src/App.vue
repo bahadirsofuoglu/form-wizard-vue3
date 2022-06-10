@@ -24,7 +24,6 @@ const beforeChange = () => {
     @change="test"
     title="adfas"
     :before-change="beforeChange"
-    :start-index="1"
   >
     <div v-if="currentTab === 0">
       <h1>Hello</h1>
