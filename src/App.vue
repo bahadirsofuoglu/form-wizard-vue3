@@ -24,16 +24,10 @@ const beforeChange = () => {
     @change="test"
     title="adfas"
     :before-change="beforeChange"
-    is-vertical
   >
     <div v-if="currentTab === 0">
       <h1>Hello</h1>
       <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-
       <h1>Hello</h1>
     </div>
     <div v-if="currentTab === 1">

@@ -87,9 +87,9 @@ const props = defineProps({
         icon: 'check'
       },
       {
-        id: 0,
-        title: 'Step 1',
-        icon: 'map'
+        id: 3,
+        title: 'Step 3',
+        icon: 'pen'
       }
     ]
   },
@@ -210,6 +210,4 @@ const navigateToTab = (index: number) => {
 
   setActiveIndex()
 }
-
-defineExpose(['setActiveIndex'])
 </script>
