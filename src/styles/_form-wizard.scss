@@ -154,7 +154,8 @@
     overflow-x: hidden !important;
     padding-right: 30px;
     li {
-      padding: 60px 0;
+      display: flex;
+      padding: 40px;
       .fw-list-progress {
         position: absolute;
         width: 8px;
