@@ -38,9 +38,9 @@
             <slot name="custom-buttons-right" />
 
             <span v-if="isLastStep" role="button" @click="nextTab">
-              <slot name="finish">
+              <slot name="done">
                 <button class="fw-btn">
-                  {{ finishButtonText }}
+                  {{ doneButtonText }}
                 </button>
               </slot>
             </span>
@@ -85,6 +85,11 @@ const props = defineProps({
         id: 1,
         title: 'Step 2',
         icon: 'check'
+      },
+      {
+        id: 0,
+        title: 'Step 1',
+        icon: 'map'
       }
     ]
   },
@@ -100,9 +105,9 @@ const props = defineProps({
     type: String,
     default: 'Back'
   },
-  finishButtonText: {
+  doneButtonText: {
     type: String,
-    default: 'Finish'
+    default: 'Done'
   },
   hideButtons: {
     type: Boolean,
@@ -205,4 +210,6 @@ const navigateToTab = (index: number) => {
 
   setActiveIndex()
 }
+
+defineExpose(['setActiveIndex'])
 </script>
