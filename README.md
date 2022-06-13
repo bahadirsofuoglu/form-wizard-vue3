@@ -1,16 +1,40 @@
-# Vue 3 + TypeScript + Vite
+# Form Wizard Vue3
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Install
 
-## Recommended IDE Setup
+```bash
+yarn add
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+# or use npm
 
-## Type Support For `.vue` Imports in TS
+npm install form-wizard-vue3
+```
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+Then, import component globally:
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+```js
+import Wizard from 'form-wizard-vue3'
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+export default {
+  install(app) {
+    app.component('Wizard', Wizard)
+  }
+}
+```
+
+# or use directly
+
+```js
+import 'form-wizard-vue3/dist/form-wizard-vue3.css'
+import Wizard from 'form-wizard-vue3'
+```
+
+The component itself does not include any CSS. You'll need to include it separately:
+
+```js
+import 'form-wizard-vue3/dist/form-wizard-vue3.css'
+```
+
+## License
+
+[MIT](https://github.com/bahadirsofuoglu/form-wizard-vue3/blob/master/LICENSE.md)
