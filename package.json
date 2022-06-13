@@ -11,10 +11,8 @@
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
-  "dependencies": {
-    "bootstrap-icons": "^1.8.3",
-    "path": "^0.12.7",
-    "vue": "^3.2.25"
+  "peerDependencies": {
+    "vue": "3.x"
   },
   "devDependencies": {
     "@types/node": "^17.0.42",
@@ -27,6 +25,9 @@
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
     "vitest": "0.12.9",
-    "vue-tsc": "^0.34.7"
+    "vue-tsc": "^0.34.7",
+    "bootstrap-icons": "^1.8.3",
+    "path": "^0.12.7",
+    "vue": "^3.2.25"
   }
 }

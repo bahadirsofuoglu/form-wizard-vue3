@@ -1,4 +1,5 @@
 /// <reference types="vitest" />
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
@@ -23,6 +24,20 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'form-wizard-vue3',
       fileName: format => `form-wizard-vue3.${format}.js`
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        exports: 'named',
+        assetFileNames: `form-wizard-vue3.[ext]`,
+        globals: {
+          vue: 'Vue',
+          jquery: '$'
+        }
+      }
     }
+  },
+  resolve: {
+    dedupe: ['vue']
   }
 })
