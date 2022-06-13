@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
+          registry-url: https://npm.pkg.github.com/
+          scope: 'bahadirsofuoglu'
       - run: npm install
 
       - name: Test
