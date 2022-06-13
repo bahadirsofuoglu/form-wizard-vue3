@@ -10,10 +10,10 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        run: npm install --frozen-lockfile
+        run: npm install
 
       - name: Test with Coverage
-        run: npm coverage
+        run: npm run coverage
 
       - name: Report Coverage
         uses: coverallsapp/github-action@master
