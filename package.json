@@ -1,21 +1,33 @@
 {
-  "name": "form-wizard-vue",
+  "name": "form-wizard-vue3",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "main": "./dist/form-wizard-vue3.umd.js",
+  "module": "./dist/form-wizard-vue3.es.js",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
-  "dependencies": {
-    "vue": "^3.2.25"
+  "peerDependencies": {
+    "vue": "3.x"
   },
   "devDependencies": {
+    "@types/node": "^17.0.42",
     "@vitejs/plugin-vue": "^2.3.3",
     "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/test-utils": "2.0.0",
+    "c8": "^7.11.3",
+    "jsdom": "^19.0.0",
     "sass": "^1.52.0",
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
-    "vue-tsc": "^0.34.7"
+    "vitest": "0.12.9",
+    "vue-tsc": "^0.34.7",
+    "bootstrap-icons": "^1.8.3",
+    "path": "^0.12.7",
+    "vue": "^3.2.25"
   }
 }

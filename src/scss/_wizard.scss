@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+.fw-card {
+  background: #ffffff;
+  border: 1px solid #eff0f7;
+  box-shadow: 0px 5px 16px rgba(8, 15, 52, 0.06);
+  border-radius: 34px;
+}
+.form-wizard-vue {
+  display: flex;
+  flex-direction: column;
+
+  .fw-body-list {
+    position: relative;
+    text-align: center;
+    display: flex;
+    overflow: hidden;
+    list-style-type: none !important;
+
+    li {
+      position: relative;
+      padding: 1.5rem;
+      .fw-list-wrapper-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        background: $icon-grey;
+        color: $icon-text;
+
+        width: 48.89px;
+        height: 48px;
+        border-radius: 50%;
+      }
+    }
+    .fw-list-progress {
+      position: absolute;
+      width: 40%;
+      height: 8.47px;
+      background: #eff0f7;
+      top: 40%;
+      left: 80%;
+    }
+    .fw-list-progress-active {
+      background: $progress-active;
+    }
+    li:last-child {
+      .fw-list-progress {
+        width: 0%;
+      }
+    }
+
+    li,
+    .fw-list-wrapper {
+      flex: 1;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-grow: 1;
+    }
+    .fw-list-wrapper {
+      display: flex;
+    }
+    > li > .fw-list-wrapper {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0 auto;
+      color: #6f6c90;
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  .fw-body {
+    display: flex;
+    flex-direction: column;
+
+    &-content {
+      padding: 20px 60px;
+    }
+  }
+
+  .fw-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .fw-step-active {
+    background: $btn-bg !important;
+    color: $white-color !important;
+  }
+
+  .fw-btn {
+    background: $btn-bg;
+    padding: 0.7rem 1.5rem;
+    min-width: unset;
+    border-radius: 0.4rem;
+    border: none;
+
+    font-family: 'DM Sans';
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+
+    text-align: center;
+    color: #ffffff;
+
+    span {
+      margin-right: 3px;
+    }
+
+    &-back {
+      background: $btn-back-bg !important;
+      border: none;
+      span {
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+.fw-overflow-scroll {
+  .fw-body-list {
+    &:hover {
+      overflow-x: scroll;
+    }
+    &::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+      background-color: $btn-bg;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      background-color: $btn-bg;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #555;
+    }
+  }
+}
+
+.fw-overflow-scroll.fw-vertical {
+  .fw-body-list:hover {
+    overflow-x: unset !important;
+    overflow-y: scroll !important;
+  }
+}
+
+.fw-vertical {
+  flex-direction: row;
+  min-height: 600px;
+  max-height: 800px;
+
+  .fw-body {
+    flex-direction: column;
+    flex: 1 1;
+
+    &-content {
+      padding: 60px;
+      width: 100%;
+      flex: 20 1;
+    }
+  }
+  .fw-body-list {
+    flex-direction: column !important;
+    padding-right: 30px;
+    overflow-x: hidden !important;
+    li {
+      display: flex;
+      padding: 40px;
+      .fw-list-progress {
+        position: absolute;
+        width: 8px;
+        height: 40%;
+        background: #eff0f7;
+        top: 80%;
+        left: 45%;
+      }
+      .fw-list-progress-active {
+        background: $progress-active;
+      }
+    }
+  }
+}

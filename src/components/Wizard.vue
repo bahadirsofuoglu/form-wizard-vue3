@@ -1,7 +1,15 @@
 <template>
-  <div :id="id" class="fw" :class="[{ 'fw-vertical': isVertical }]">
-    <ul class="fw__body__list" role="tablist">
-      <WizardStep
+  <div
+    :id="id"
+    class="form-wizard-vue"
+    :class="[
+      { 'fw-vertical': verticalTabs },
+      { 'fw-overflow-scroll': scrollableTabs },
+      { 'fw-card': cardBackground }
+    ]"
+  >
+    <ul class="fw-body-list" role="tablist">
+      <wizard-step
         v-for="(tab, index) in tabs"
         :key="tab.id"
         :tab="tab"
@@ -9,42 +17,51 @@
         :currentIndex="currentTabIndex"
         @click="navigateToTab(index)"
       >
-      </WizardStep>
+      </wizard-step>
     </ul>
-    <div class="fw__body">
-      <div class="fw__body__content">
-        <div class="fw__body__container">
+    <div class="fw-body">
+      <div class="fw-body-content">
+        <div class="fw-body-container">
           <slot />
         </div>
       </div>
-      <div v-if="!hideButtons" class="fw__footer">
+      <div v-if="!hideButtons" class="fw-footer">
         <slot name="footer">
-          <div class="fw__footer__left">
+          <div class="fw-footer-left">
             <span v-if="displayPrevTab" role="button" @click="prevTab">
-              <slot name="prev">
-                <button class="fw__btn fw__btn-back" :disabled="loading">
-                  {{ backButtonText }}
+              <slot name="back">
+                <button class="fw-btn fw-btn-back">
+                  <i :class="getIconClass(backButtonOptions.icon)" />
+                  <span v-if="!backButtonOptions.hideText">{{
+                    backButtonOptions.text
+                  }}</span>
                 </button>
               </slot>
             </span>
             <slot name="custom-buttons-left" />
           </div>
 
-          <div class="fw__footer__right">
+          <div class="fw-footer-right">
             <slot name="custom-buttons-right" />
 
             <span v-if="isLastStep" role="button" @click="nextTab">
-              <slot name="finish">
-                <button class="fw__btn">
-                  {{ finishButtonText }}
+              <slot name="done">
+                <button class="fw-btn">
+                  <span v-if="!doneButtonOptions.hideText">{{
+                    doneButtonOptions.text
+                  }}</span>
+                  <i :class="getIconClass(doneButtonOptions.icon)" />
                 </button>
               </slot>
             </span>
 
             <span v-else role="button" @click="nextTab">
               <slot name="next">
-                <button class="fw__btn" :disabled="loading">
-                  {{ nextButtonText }}
+                <button class="fw-btn">
+                  <span v-if="!nextButtonOptions.hideText">{{
+                    nextButtonOptions.text
+                  }}</span>
+                  <i :class="getIconClass(nextButtonOptions.icon)" />
                 </button>
               </slot>
             </span>
@@ -55,61 +72,68 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, computed } from 'vue'
+<script setup lang="ts">
+import { onMounted, computed } from 'vue'
 import WizardStep from './WizardStep.vue'
+import { ButtonOption, Tab, Props } from '../types/wizard'
 
 const emit = defineEmits(['change', 'completeWizard'])
 
-const props = defineProps({
+const props: Props = defineProps({
+  id: {
+    type: String,
+    default: 'fw-' + new Date().valueOf()
+  },
   customTabs: {
     type: Array,
     default: () => [
       {
         id: 0,
-        active: true,
-        checked: false,
-        title: 'Step 1'
+        title: 'Step 1',
+        icon: 'map'
       },
       {
         id: 1,
-        checked: false,
-        title: 'Step 2'
+        title: 'Step 2',
+        icon: 'check'
+      },
+      {
+        id: 2,
+        title: 'Step 3',
+        icon: 'pen'
       }
     ]
   },
-  id: {
-    type: String,
-    default: 'fw-' + new Date().valueOf()
+  nextButton: {
+    type: Object,
+    default: function () {
+      return {}
+    }
   },
-  nextButtonText: {
-    type: String,
-    default: 'Next'
+  backButton: {
+    type: Object,
+    default: function () {
+      return {}
+    }
   },
-  backButtonText: {
-    type: String,
-    default: 'Back'
-  },
-  finishButtonText: {
-    type: String,
-    default: 'Finish'
+  doneButton: {
+    type: Object,
+    default: function () {
+      return {}
+    }
   },
   hideButtons: {
     type: Boolean,
     default: false
   },
-  color: {
-    type: String,
-    default: '#e74c3c'
-  },
   startIndex: {
     type: Number,
     default: 0,
-    validator: value => {
+    validator: (value: number) => {
       return value >= 0
     }
   },
-  isVertical: {
+  verticalTabs: {
     type: Boolean,
     default: false
   },
@@ -120,45 +144,80 @@ const props = defineProps({
   navigableTabs: {
     type: Boolean,
     default: false
+  },
+  scrollableTabs: {
+    type: Boolean,
+    default: false
+  },
+  cardBackground: {
+    type: Boolean,
+    default: false
   }
 })
 
-const loading = ref(false)
-const maxTabIndex = ref()
-let currentTabIndex = ref(0)
-const tabs = ref([])
+let maxTabIndex: number = $ref()
+let currentTabIndex = $ref(0)
+let tabs: Tab[] = $ref([])
+
+const backButtonOptions: ButtonOption = Object.assign(
+  {
+    text: 'Back',
+    icon: 'arrow-left',
+    hideText: false,
+    hideIcon: false
+  },
+  props.backButton
+)
+const nextButtonOptions: ButtonOption = Object.assign(
+  {
+    text: 'Next',
+    icon: 'arrow-right',
+    hideText: false,
+    hideIcon: false
+  },
+  props.nextButton
+)
+const doneButtonOptions: ButtonOption = Object.assign(
+  {
+    text: 'Done',
+    icon: 'arrow-right',
+    hideText: false,
+    hideIcon: false
+  },
+  props.doneButton
+)
 
 onMounted(() => {
   setDefaultValues()
 })
 
 const displayPrevTab = computed(() => {
-  return currentTabIndex.value !== 0
+  return currentTabIndex !== 0
 })
 
 const isLastStep = computed(() => {
-  return currentTabIndex.value === maxTabIndex.value
+  return currentTabIndex === maxTabIndex
 })
 
 const setDefaultValues = () => {
-  tabs.value = props.customTabs.map(tab => {
-    return {
-      ...tab,
-      active: tab.active || false
-    }
-  })
+  tabs = props.customTabs as Tab[]
 
-  maxTabIndex.value = tabs.value.length - 1
-  currentTabIndex.value = props.startIndex
+  maxTabIndex = tabs.length - 1
+  currentTabIndex = props.startIndex
+
+  setActiveIndex()
+
+  emit('change', currentTabIndex)
 }
+
 const nextTab = () => {
-  if (currentTabIndex.value === maxTabIndex.value) {
+  if (currentTabIndex === maxTabIndex) {
     completeWizard()
 
     return
   }
 
-  currentTabIndex.value = currentTabIndex.value + 1
+  currentTabIndex = currentTabIndex + 1
 
   setActiveIndex()
   props.beforeChange()
@@ -167,39 +226,39 @@ const nextTab = () => {
 }
 
 const prevTab = () => {
-  if (currentTabIndex.value === 0) {
+  if (currentTabIndex === 0) {
     return
   }
 
-  currentTabIndex.value = currentTabIndex.value - 1
+  currentTabIndex = currentTabIndex - 1
 
   setActiveIndex()
+
   props.beforeChange()
 
   emit('change', currentTabIndex)
 }
 
 const setActiveIndex = () => {
-  tabs.value = tabs.value.map(tab => {
-    return {
-      ...tab,
-      active: false
+  for (const [index, tab] of tabs.entries()) {
+    if (index === maxTabIndex + 1) {
+      return
     }
-  })
-
-  tabs.value[currentTabIndex.value].active = true
+    tab.active = index <= currentTabIndex
+  }
 }
 
 const completeWizard = () => {
   emit('completeWizard', currentTabIndex)
 }
 
-const navigateToTab = index => {
-  debugger
+const navigateToTab = (index: number) => {
   if (!props.navigableTabs) return
 
-  currentTabIndex.value = index
+  currentTabIndex = index
 
   setActiveIndex()
 }
+
+const getIconClass = (iconName: string) => `bi bi-${iconName}`
 </script>

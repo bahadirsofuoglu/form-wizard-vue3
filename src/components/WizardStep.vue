@@ -1,9 +1,13 @@
 <template>
   <li>
-    <div class="fw_list_wrapper">
+    <div
+      class="fw-list-progress"
+      :class="{ 'fw-list-progress-active': progressActive }"
+    ></div>
+    <div class="fw-list-wrapper">
       <div
         :id="`step-${tab.id}`"
-        class="fw-icon-circle"
+        class="fw-list-wrapper-icon"
         role="tab"
         :class="[
           {
@@ -13,26 +17,17 @@
       >
         <div class="fw-step-container">
           <slot name="active-step">
-            <i v-if="props.tab.icon" :icon="props.tab.icon" class="fw-icon"></i>
-            <i v-else class="fw-icon">{{ index + 1 }}</i>
+            <i v-if="props.tab.icon" :class="iconClass"></i>
+            <i v-else>{{ index + 1 }}</i>
           </slot>
         </div>
       </div>
-      <div
-        class="fw-step-progress"
-        :class="[
-          {
-            'fw-step-progress-active': progressActive
-          }
-        ]"
-      />
       <slot name="title">
         <span
-          class="stepTitle"
+          class="fw-step-title"
           :class="{
             active: tab.active
           }"
-          :style="tab.active ? stepTitleStyle : {}"
         >
           {{ tab.title }}
         </span>
@@ -40,8 +35,9 @@
     </div>
   </li>
 </template>
-<script setup>
-import { onMounted, computed } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
+
 const props = defineProps({
   tab: {
     type: Object,
@@ -52,15 +48,11 @@ const props = defineProps({
     default: 0
   },
   currentIndex: {
-    type: Number
+    type: Number,
+    default: 0
   }
 })
 
-const progressActive = computed(() => {
-  return props.currentIndex === props.index + 1
-})
-
-onMounted(() => {
-  console.log(props.currentIndex === props.index + 1)
-})
+const progressActive = computed(() => props.currentIndex > props.index)
+const iconClass = computed(() => `bi bi-${props.tab.icon}`)
 </script>
