@@ -13,8 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-          registry-url: https://npm.pkg.github.com/
-          scope: '@bahadirsofuoglu'
+
       - run: npm install
 
       - name: Test
@@ -23,4 +22,5 @@ jobs:
       - run: npm run build
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
