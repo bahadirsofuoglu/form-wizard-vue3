@@ -2,7 +2,11 @@
   <div
     :id="id"
     class="form-wizard-vue"
-    :class="[{ 'fw-vertical': isVertical }]"
+    :class="[
+      { 'fw-vertical': verticalTabs },
+      { 'fw-overflow-scroll': scrollableTabs },
+      { 'fw-card': cardBackground }
+    ]"
   >
     <ul class="fw-body-list" role="tablist">
       <wizard-step
@@ -25,8 +29,9 @@
         <slot name="footer">
           <div class="fw-footer-left">
             <span v-if="displayPrevTab" role="button" @click="prevTab">
-              <slot name="prev">
+              <slot name="back">
                 <button class="fw-btn fw-btn-back">
+                  <i class="bi bi-arrow-left" />
                   {{ backButtonText }}
                 </button>
               </slot>
@@ -41,6 +46,7 @@
               <slot name="done">
                 <button class="fw-btn">
                   {{ doneButtonText }}
+                  <i class="bi bi-arrow-left" />
                 </button>
               </slot>
             </span>
@@ -49,6 +55,7 @@
               <slot name="next">
                 <button class="fw-btn">
                   {{ nextButtonText }}
+                  <i class="bi bi-arrow-right" />
                 </button>
               </slot>
             </span>
@@ -73,6 +80,10 @@ type Tab = {
 const emit = defineEmits(['change', 'completeWizard'])
 
 const props = defineProps({
+  id: {
+    type: String,
+    default: 'fw-' + new Date().valueOf()
+  },
   customTabs: {
     type: Array,
     default: () => [
@@ -92,10 +103,6 @@ const props = defineProps({
         icon: 'pen'
       }
     ]
-  },
-  id: {
-    type: String,
-    default: 'fw-' + new Date().valueOf()
   },
   nextButtonText: {
     type: String,
@@ -120,7 +127,7 @@ const props = defineProps({
       return value >= 0
     }
   },
-  isVertical: {
+  verticalTabs: {
     type: Boolean,
     default: false
   },
@@ -129,6 +136,14 @@ const props = defineProps({
     default: () => {}
   },
   navigableTabs: {
+    type: Boolean,
+    default: false
+  },
+  scrollableTabs: {
+    type: Boolean,
+    default: false
+  },
+  cardBackground: {
     type: Boolean,
     default: false
   }

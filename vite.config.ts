@@ -31,8 +31,7 @@ export default defineConfig({
         exports: 'named',
         assetFileNames: `form-wizard-vue3.[ext]`,
         globals: {
-          vue: 'Vue',
-          jquery: '$'
+          vue: 'Vue'
         }
       }
     }

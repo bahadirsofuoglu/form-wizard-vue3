@@ -3,15 +3,15 @@
   box-sizing: border-box;
   padding: 0;
 }
-
-.form-wizard-vue {
-  display: flex;
-  flex-direction: column;
-
+.fw-card {
   background: #ffffff;
   border: 1px solid #eff0f7;
   box-shadow: 0px 5px 16px rgba(8, 15, 52, 0.06);
   border-radius: 34px;
+}
+.form-wizard-vue {
+  display: flex;
+  flex-direction: column;
 
   .fw-body-list {
     position: relative;
@@ -73,6 +73,52 @@
       position: relative;
       top: 3px;
     }
+  }
+
+  .fw-body {
+    display: flex;
+    flex-direction: column;
+
+    &-content {
+      padding: 20px 60px;
+    }
+  }
+
+  .fw-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .fw-step-active {
+    background: $btn-bg !important;
+    color: $white-color !important;
+  }
+
+  .fw-btn {
+    background: $btn-bg;
+    padding: 0.7rem 1.5rem;
+    min-width: unset;
+    border-radius: 0.4rem;
+    border: none;
+
+    font-family: 'DM Sans';
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+
+    text-align: center;
+    color: #ffffff;
+
+    &-back {
+      background: $btn-back-bg !important;
+      border: none;
+    }
+  }
+}
+
+.fw-overflow-scroll {
+  .fw-body-list {
     &:hover {
       overflow-x: scroll;
     }
@@ -94,44 +140,12 @@
       background-color: #555;
     }
   }
+}
 
-  .fw-body {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .fw-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
-
-  .fw-step-active {
-    background: $btn-bg !important;
-    color: $white-color !important;
-  }
-
-  .fw-btn {
-    padding: 20px 40px 21px;
-    background: $btn-bg;
-    box-shadow: 0px 3px 12px rgba(74, 58, 255, 0.18);
-    border-radius: 56px;
-    border: none;
-    cursor: pointer;
-
-    font-family: 'DM Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 20px;
-
-    text-align: center;
-    color: #ffffff;
-
-    &-back {
-      background: $btn-back-bg !important;
-      border: none;
-    }
+.fw-overflow-scroll.fw-vertical {
+  .fw-body-list:hover {
+    overflow-x: unset !important;
+    overflow-y: scroll !important;
   }
 }
 
@@ -143,16 +157,17 @@
   .fw-body {
     flex-direction: column;
     flex: 1 1;
-  }
-  .fw-body-content {
-    padding: 60px;
-    width: 100%;
-    flex: 20 1;
+
+    &-content {
+      padding: 60px;
+      width: 100%;
+      flex: 20 1;
+    }
   }
   .fw-body-list {
     flex-direction: column !important;
-    overflow-x: hidden !important;
     padding-right: 30px;
+    overflow-x: hidden !important;
     li {
       display: flex;
       padding: 40px;
@@ -168,25 +183,5 @@
         background: $progress-active;
       }
     }
-  }
-  ul:hover {
-    overflow-y: scroll;
-  }
-  ul::-webkit-scrollbar {
-    width: 3px;
-    height: 3px;
-    background-color: $btn-bg;
-  }
-
-  ul::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    background-color: $btn-bg;
-  }
-
-  ul::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: $btn-bg;
   }
 }
