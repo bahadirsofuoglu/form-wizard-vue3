@@ -25,7 +25,7 @@ export default {
 }
 ```
 
-### use directly
+Or import component directly:
 
 ```js
 import 'form-wizard-vue3/dist/form-wizard-vue3.css'
