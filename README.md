@@ -1,7 +1,7 @@
 # Form Wizard Vue3
 
 Form Wizard Vue 3 is a simple stepper/wizard component. It can be easily customized, has no dependencies, works in harmony with your libraries.
-[![Coverage Status](https://coveralls.io/repos/github/bahadirsofuoglu/form-wizard-vue3/badge.svg?branch=master)](https://coveralls.io/github/bahadirsofuoglu/form-wizard-vue3?branch=master)
+[![Coverage Status](https://codecov.io/gh/bahadirsofuoglu/form-wizard-vue3/branch/master/graph/badge.svg)](https://codecov.io/gh/bahadirsofuoglu/form-wizard-vue3)
 
 ## Install
 
