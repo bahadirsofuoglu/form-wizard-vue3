@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-yarn add
+yarn add form-wizard-vue3
 
 # or use npm
 
@@ -22,7 +22,7 @@ export default {
 }
 ```
 
-# or use directly
+### use directly
 
 ```js
 import 'form-wizard-vue3/dist/form-wizard-vue3.css'
