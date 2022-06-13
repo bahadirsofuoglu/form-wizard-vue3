@@ -15,7 +15,7 @@ export default defineConfig({
     environment: 'jsdom',
     coverage: {
       include: ['src/**/*.vue'],
-      reporter: ['text', 'html', 'lcov']
+      reporter: ['lcov']
     }
   },
   build: {
