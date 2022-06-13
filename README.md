@@ -1,5 +1,7 @@
 # Form Wizard Vue3
 
+Form Wizard Vue 3 is a simple stepper/wizard component. It can be easily customized, has no dependencies, works in harmony with your libraries.
+
 ## Install
 
 ```bash
