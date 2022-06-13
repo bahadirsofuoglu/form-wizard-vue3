@@ -31,8 +31,10 @@
             <span v-if="displayPrevTab" role="button" @click="prevTab">
               <slot name="back">
                 <button class="fw-btn fw-btn-back">
-                  <i class="bi bi-arrow-left" />
-                  {{ backButtonText }}
+                  <i :class="getIconClass(backButtonOptions.icon)" />
+                  <span v-if="!backButtonOptions.hideText">{{
+                    backButtonOptions.text
+                  }}</span>
                 </button>
               </slot>
             </span>
@@ -45,8 +47,10 @@
             <span v-if="isLastStep" role="button" @click="nextTab">
               <slot name="done">
                 <button class="fw-btn">
-                  {{ doneButtonText }}
-                  <i class="bi bi-arrow-left" />
+                  <span v-if="!doneButtonOptions.hideText">{{
+                    doneButtonOptions.text
+                  }}</span>
+                  <i :class="getIconClass(doneButtonOptions.icon)" />
                 </button>
               </slot>
             </span>
@@ -54,8 +58,10 @@
             <span v-else role="button" @click="nextTab">
               <slot name="next">
                 <button class="fw-btn">
-                  {{ nextButtonText }}
-                  <i class="bi bi-arrow-right" />
+                  <span v-if="!nextButtonOptions.hideText">{{
+                    nextButtonOptions.text
+                  }}</span>
+                  <i :class="getIconClass(nextButtonOptions.icon)" />
                 </button>
               </slot>
             </span>
@@ -69,17 +75,11 @@
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
 import WizardStep from './WizardStep.vue'
-
-type Tab = {
-  id?: number
-  title?: string
-  icon?: string
-  active?: boolean
-}
+import { ButtonOption, Tab, Props } from '../types/wizard'
 
 const emit = defineEmits(['change', 'completeWizard'])
 
-const props = defineProps({
+const props: Props = defineProps({
   id: {
     type: String,
     default: 'fw-' + new Date().valueOf()
@@ -98,23 +98,29 @@ const props = defineProps({
         icon: 'check'
       },
       {
-        id: 3,
+        id: 2,
         title: 'Step 3',
         icon: 'pen'
       }
     ]
   },
-  nextButtonText: {
-    type: String,
-    default: 'Next'
+  nextButton: {
+    type: Object,
+    default: function () {
+      return {}
+    }
   },
-  backButtonText: {
-    type: String,
-    default: 'Back'
+  backButton: {
+    type: Object,
+    default: function () {
+      return {}
+    }
   },
-  doneButtonText: {
-    type: String,
-    default: 'Done'
+  doneButton: {
+    type: Object,
+    default: function () {
+      return {}
+    }
   },
   hideButtons: {
     type: Boolean,
@@ -152,6 +158,34 @@ const props = defineProps({
 let maxTabIndex: number = $ref()
 let currentTabIndex = $ref(0)
 let tabs: Tab[] = $ref([])
+
+const backButtonOptions: ButtonOption = Object.assign(
+  {
+    text: 'Back',
+    icon: 'arrow-left',
+    hideText: false,
+    hideIcon: false
+  },
+  props.backButton
+)
+const nextButtonOptions: ButtonOption = Object.assign(
+  {
+    text: 'Next',
+    icon: 'arrow-right',
+    hideText: false,
+    hideIcon: false
+  },
+  props.nextButton
+)
+const doneButtonOptions: ButtonOption = Object.assign(
+  {
+    text: 'Done',
+    icon: 'arrow-right',
+    hideText: false,
+    hideIcon: false
+  },
+  props.doneButton
+)
 
 onMounted(() => {
   setDefaultValues()
@@ -225,4 +259,6 @@ const navigateToTab = (index: number) => {
 
   setActiveIndex()
 }
+
+const getIconClass = (iconName: string) => `bi bi-${iconName}`
 </script>
