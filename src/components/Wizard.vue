@@ -258,6 +258,10 @@ const navigateToTab = (index: number) => {
   currentTabIndex = index
 
   setActiveIndex()
+
+  props.beforeChange()
+
+  emit('change', currentTabIndex)
 }
 
 const getIconClass = (iconName: string) => `bi bi-${iconName}`
