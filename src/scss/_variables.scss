@@ -1,12 +1,12 @@
-$icon-bg: #f3f2ee !default;
-$btn-bg: linear-gradient(90deg, #4a3aff 0%, #6d3aff 100%) !default;
-$btn-back-bg: #6f6c90 !default;
+$primary: linear-gradient(90deg, #4a3aff 0%, #6d3aff 100%) !default;
 $white-color: #ffffff !default;
-$icon-grey: #eff0f7 !default;
-$icon-text: #6f6c90 !default;
+$tab-bg: #eff0f7 !default;
+$tab-text: #6f6c90 !default;
+$btn-back-bg: #6f6c90 !default;
 $progress-active: linear-gradient(
   90deg,
   #0088ff -3.12%,
   #a033ff 48.22%,
   #ff5c87 105.52%
 ) !default;
+$tab-checked: #4a3aff9e !default;

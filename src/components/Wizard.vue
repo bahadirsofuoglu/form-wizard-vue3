@@ -155,9 +155,9 @@ const props: Props = defineProps({
   }
 })
 
-let maxTabIndex: number = $ref()
-let currentTabIndex = $ref(0)
-let tabs: Tab[] = $ref([])
+let maxTabIndex = $ref<number>()
+let currentTabIndex = $ref<number>(0)
+let tabs = $ref<Tab[]>([])
 
 const backButtonOptions: ButtonOption = Object.assign(
   {
@@ -244,7 +244,9 @@ const setActiveIndex = () => {
     if (index === maxTabIndex + 1) {
       return
     }
-    tab.active = index <= currentTabIndex
+
+    tab.checked = index < currentTabIndex
+    tab.active = index === currentTabIndex
   }
 }
 
