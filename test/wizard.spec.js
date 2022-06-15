@@ -8,9 +8,13 @@ beforeEach(() => {
   wrapper = mount(Wizard)
 })
 
-const checkActiveItemCount = () => {
+const getActiveItemCount = () => {
   return wrapper.vm.tabs.filter(tab => tab.active).length
 }
+const getCheckedItemCount = () => {
+  return wrapper.vm.tabs.filter(tab => tab.checked).length
+}
+
 describe('Wizard unit tests', () => {
   test('displayPrevTab should be false when component mount', () => {
     expect(wrapper.vm.displayPrevTab).toBe(false)
@@ -39,18 +43,11 @@ describe('Wizard unit tests', () => {
     await wrapper.findAll('.fw-body-list > li')[1].trigger('click')
 
     expect(wrapper.vm.currentTabIndex).toEqual(1)
-    expect(checkActiveItemCount()).toEqual(2)
+    expect(getActiveItemCount()).toEqual(1)
+    expect(getCheckedItemCount()).toEqual(1)
   })
 
-  test('when navigableTabs props is true currentTabIndex should change', async () => {
-    await wrapper.setProps({ navigableTabs: true })
-    await wrapper.findAll('.fw-body-list > li')[1].trigger('click')
-
-    expect(wrapper.vm.currentTabIndex).toEqual(1)
-    expect(checkActiveItemCount()).toEqual(2)
-  })
-
-  test('when navigableTabs props is true currentTabIndex should change', async () => {
+  test('when navigableTabs props true and tabs cliced buttons text should be changed', async () => {
     await wrapper.setProps({ navigableTabs: true })
     await wrapper.findAll('.fw-body-list > li')[2].trigger('click')
 
@@ -62,7 +59,8 @@ describe('Wizard unit tests', () => {
     await wrapper.findAll('.fw-btn')[0].trigger('click')
 
     expect(wrapper.vm.currentTabIndex).toEqual(1)
-    expect(checkActiveItemCount()).toEqual(2)
+    expect(getActiveItemCount()).toEqual(1)
+    expect(getCheckedItemCount()).toEqual(1)
     expect(wrapper.emitted().change).toBeTruthy()
   })
 
@@ -71,7 +69,7 @@ describe('Wizard unit tests', () => {
     await wrapper.findAll('.fw-btn')[0].trigger('click')
 
     expect(wrapper.vm.currentTabIndex).toEqual(0)
-    expect(checkActiveItemCount()).toEqual(1)
+    expect(getActiveItemCount()).toEqual(1)
     expect(wrapper.emitted().change).toBeTruthy()
   })
 
@@ -82,7 +80,8 @@ describe('Wizard unit tests', () => {
 
     expect(wrapper.findAll('.fw-btn')[1].text()).toBe('Done')
     expect(wrapper.vm.currentTabIndex).toEqual(2)
-    expect(checkActiveItemCount()).toEqual(3)
+    expect(getActiveItemCount()).toEqual(1)
+    expect(getCheckedItemCount()).toEqual(2)
     expect(wrapper.emitted().completeWizard).toBeTruthy()
   })
 })
