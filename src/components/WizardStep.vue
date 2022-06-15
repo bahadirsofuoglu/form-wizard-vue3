@@ -11,7 +11,8 @@
         role="tab"
         :class="[
           {
-            'fw-step-active': tab.active
+            'fw-step-active': tab.active,
+            'fw-step-checked': tab.checked
           }
         ]"
       >
