@@ -82,6 +82,6 @@ describe('Wizard unit tests', () => {
     expect(wrapper.vm.currentTabIndex).toEqual(2)
     expect(getActiveItemCount()).toEqual(1)
     expect(getCheckedItemCount()).toEqual(2)
-    expect(wrapper.emitted().completeWizard).toBeTruthy()
+    expect(wrapper.emitted()['complete:wizard']).toBeTruthy()
   })
 })

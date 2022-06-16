@@ -73,11 +73,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, nextTick } from 'vue'
 import WizardStep from './WizardStep.vue'
 import { ButtonOption, Tab, Props } from '../types/wizard'
 
-const emit = defineEmits(['change', 'completeWizard'])
+const emit = defineEmits(['change', 'complete:wizard', 'updated:tabs'])
 
 const props: Props = defineProps({
   id: {
@@ -138,6 +138,10 @@ const props: Props = defineProps({
     default: false
   },
   beforeChange: {
+    type: Function,
+    default: () => {}
+  },
+  beforeMount: {
     type: Function,
     default: () => {}
   },
@@ -210,33 +214,36 @@ const setDefaultValues = () => {
   emit('change', currentTabIndex)
 }
 
-const nextTab = () => {
+const nextTab = async () => {
   if (currentTabIndex === maxTabIndex) {
     completeWizard()
 
     return
   }
 
-  currentTabIndex = currentTabIndex + 1
+  const newTabIndex = currentTabIndex + 1
+  const oldTabIndex = currentTabIndex
 
-  setActiveIndex()
-  props.beforeChange()
+  emit('change', newTabIndex, oldTabIndex)
 
-  emit('change', currentTabIndex)
+  await props.beforeChange()
+
+  changeTab(newTabIndex)
 }
 
-const prevTab = () => {
+const prevTab = async () => {
   if (currentTabIndex === 0) {
     return
   }
 
-  currentTabIndex = currentTabIndex - 1
+  const newTabIndex = currentTabIndex - 1
+  const oldTabIndex = currentTabIndex
 
-  setActiveIndex()
+  emit('change', newTabIndex, oldTabIndex)
 
-  props.beforeChange()
+  await props.beforeChange()
 
-  emit('change', currentTabIndex)
+  changeTab(newTabIndex)
 }
 
 const setActiveIndex = () => {
@@ -248,22 +255,37 @@ const setActiveIndex = () => {
     tab.checked = index < currentTabIndex
     tab.active = index === currentTabIndex
   }
+
+  emit('updated:tabs', tabs, currentTabIndex)
 }
 
 const completeWizard = () => {
-  emit('completeWizard', currentTabIndex)
+  const newTabIndex = currentTabIndex
+  const oldTabIndex = currentTabIndex - 1
+
+  emit('complete:wizard', newTabIndex, oldTabIndex)
 }
 
-const navigateToTab = (index: number) => {
+const navigateToTab = async (index: number) => {
   if (!props.navigableTabs) return
 
-  currentTabIndex = index
+  const newTabIndex = index
+  const oldTabIndex = currentTabIndex
+
+  emit('change', newTabIndex, oldTabIndex)
+
+  await props.beforeChange()
+
+  changeTab(newTabIndex)
+}
+
+const changeTab = async (newTabIndex: number) => {
+  currentTabIndex = newTabIndex
 
   setActiveIndex()
 
-  props.beforeChange()
-
-  emit('change', currentTabIndex)
+  await nextTick()
+  await props.beforeMount()
 }
 
 const getIconClass = (iconName: string) => `bi bi-${iconName}`
