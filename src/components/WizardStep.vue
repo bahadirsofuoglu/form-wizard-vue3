@@ -12,7 +12,8 @@
         :class="[
           {
             'fw-step-active': tab.active,
-            'fw-step-checked': tab.checked
+            'fw-step-checked': tab.checked,
+            'fw-squared-tab':squaredTab
           }
         ]"
       >
@@ -51,9 +52,12 @@ const props = defineProps({
   currentIndex: {
     type: Number,
     default: 0
+  },
+  squaredTab:{
+    type:Boolean,
+    default:false
   }
 })
-
 const progressActive = computed(() => props.currentIndex > props.index)
 const iconClass = computed(() => `bi bi-${props.tab.icon}`)
 </script>

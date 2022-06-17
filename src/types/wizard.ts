@@ -27,4 +27,5 @@ export interface Props {
   navigableTabs: boolean
   beforeChange: Function
   beforeMount: Function
+  squaredTabs: boolean
 }

@@ -1,6 +1,6 @@
 {
   "name": "form-wizard-vue3",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "./dist/form-wizard-vue3.umd.js",
   "module": "./dist/form-wizard-vue3.es.js",
   "author": "Bahadir Sofuoglu <bahadirsofuoglu@gmail.com>",

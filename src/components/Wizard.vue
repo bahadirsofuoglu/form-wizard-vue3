@@ -15,6 +15,7 @@
         :tab="tab"
         :index="index"
         :currentIndex="currentTabIndex"
+        :squaredTab="squaredTabs"
         @click="navigateToTab(index)"
       >
       </wizard-step>
@@ -156,6 +157,10 @@ const props: Props = defineProps({
   cardBackground: {
     type: Boolean,
     default: false
+  },
+  squaredTabs:{
+    type:Boolean,
+    default:false
   }
 })
 
