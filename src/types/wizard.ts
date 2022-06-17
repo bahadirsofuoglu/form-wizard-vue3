@@ -3,6 +3,7 @@ export interface Tab {
   title?: string
   icon?: string
   active?: boolean
+  checked?: boolean
 }
 
 export interface ButtonOption {
