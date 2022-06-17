@@ -1,6 +1,6 @@
 {
   "name": "form-wizard-vue3",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./dist/form-wizard-vue3.umd.js",
   "module": "./dist/form-wizard-vue3.es.js",
   "author": "Bahadir Sofuoglu <bahadirsofuoglu@gmail.com>",
@@ -31,6 +31,7 @@
     "vue": "^3.2.25"
   },
   "license": "MIT",
+  "homepage": "git+https://github.com/bahadirsofuoglu/form-wizard-vue3.git",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahadirsofuoglu/form-wizard-vue3.git"
