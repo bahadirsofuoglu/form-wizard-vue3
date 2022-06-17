@@ -25,5 +25,6 @@ export interface Props {
   cardBackground: boolean
   navigableTabs: boolean
   beforeChange: Function
+  beforeMount: Function
   squaredTabs: boolean
 }
