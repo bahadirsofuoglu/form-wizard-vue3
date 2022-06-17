@@ -12,6 +12,7 @@
         :class="[
           {
             'fw-step-active': tab.active,
+            'fw-step-checked': tab.checked,
             'squared-tab':squaredTab
           }
         ]"
