@@ -43,7 +43,7 @@
     "vue-tsc": "^0.34.7"
   },
   "license": "MIT",
-  "homepage": "git+https://github.com/bahadirsofuoglu/form-wizard-vue3.git",
+  "homepage": "https://bahadirsofuoglu.github.io/form-wizard-vue3/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahadirsofuoglu/form-wizard-vue3.git"
