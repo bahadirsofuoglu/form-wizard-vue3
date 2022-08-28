@@ -15,7 +15,7 @@ beforeEach(() => {
 
 describe('Wizard unit tests', () => {
   test('displayPrevTab should be false when component mount', () => {
-    expect(wrapper.find('.fw-step-container > i').classes()[0]).toBe('bi')
+    expect(wrapper.find('.fw-step-container > i').classes()[0]).toBe('pi')
   })
 
   test('displayPrevTab should be false when component mount', async () => {
