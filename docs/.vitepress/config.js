@@ -1,6 +1,7 @@
 export default {
   title: 'Form Wizard Vue3',
   description: 'Just playing around.',
+  base: '/form-wizard-vue3/',
   themeConfig: {
     nav: [
       {
