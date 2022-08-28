@@ -16,11 +16,14 @@ export default {
       {
         text: 'Getting Started',
         collapsible: true,
+        items: [{ text: 'Installation', link: '/guide/installation' }]
+      },
+      {
+        text: 'Api',
+        collapsible: true,
         items: [
-          { text: 'Installation', link: '/guide/installation' },
-          { text: 'Getting Started', link: '/guide/getting-started' },
-          { text: 'Configuration', link: '/guide/configuration' },
-          { text: 'Deploying', link: '/guide/deploying' }
+          { text: 'Props', link: '/api/props' },
+          { text: 'Events', link: '/api/events' }
         ]
       }
     ]

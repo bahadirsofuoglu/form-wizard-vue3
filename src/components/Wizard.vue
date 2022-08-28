@@ -101,7 +101,7 @@ const props: Props = defineProps({
       {
         id: 2,
         title: 'Step 3',
-        icon: 'pen'
+        icon: 'pencil'
       }
     ]
   },
@@ -158,9 +158,9 @@ const props: Props = defineProps({
     type: Boolean,
     default: false
   },
-  squaredTabs:{
-    type:Boolean,
-    default:false
+  squaredTabs: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -293,5 +293,5 @@ const changeTab = async (newTabIndex: number) => {
   await props.beforeMount()
 }
 
-const getIconClass = (iconName: string) => `bi bi-${iconName}`
+const getIconClass = (iconName: string) => `pi pi-${iconName}`
 </script>

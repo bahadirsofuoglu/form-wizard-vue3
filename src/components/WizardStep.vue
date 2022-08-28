@@ -13,7 +13,7 @@
           {
             'fw-step-active': tab.active,
             'fw-step-checked': tab.checked,
-            'fw-squared-tab':squaredTab
+            'fw-squared-tab': squaredTab
           }
         ]"
       >
@@ -53,11 +53,11 @@ const props = defineProps({
     type: Number,
     default: 0
   },
-  squaredTab:{
-    type:Boolean,
-    default:false
+  squaredTab: {
+    type: Boolean,
+    default: false
   }
 })
 const progressActive = computed(() => props.currentIndex > props.index)
-const iconClass = computed(() => `bi bi-${props.tab.icon}`)
+const iconClass = computed(() => `pi pi-${props.tab.icon}`)
 </script>

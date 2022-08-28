@@ -18,7 +18,7 @@ Form Wizard Vue 3 is a simple stepper/wizard component. It can be easily customi
 - Customizable with slots and SCSS variables
 - TypeScript
 - Accessible
-- Zero dependencies
+- Uses [Prime Icons](https://primefaces.org/primevue/icons) (customization is possible)
 
 ## Resources
 
