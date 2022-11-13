@@ -42,6 +42,20 @@ Component uses customTabs for steps handling. Added default value only for sampl
 
 All your next button options can be selected with this prop
 
+#### Default Options:
+
+```js
+  {
+      text: 'Next',
+      icon: 'arrow-right',
+      hideText: false,
+      hideIcon: false,
+      disabled: false
+    }
+```
+
+#### Prop:
+
 ```js
   nextButton: {
     type: Object,
@@ -55,6 +69,20 @@ All your next button options can be selected with this prop
 
 All your back button options can be selected with this prop
 
+#### Default Options:
+
+```js
+ {
+      text: 'Back',
+      icon: 'arrow-left',
+      hideText: false,
+      hideIcon: false,
+      disabled: false
+    }
+```
+
+#### Prop:
+
 ```js
   backButton: {
     type: Object,
@@ -67,6 +95,20 @@ All your back button options can be selected with this prop
 ## doneButton
 
 All your done button options can be selected with this prop
+
+#### Default Options:
+
+```js
+ {
+      text: 'Done',
+      icon: 'check',
+      hideText: false,
+      hideIcon: false,
+      disabled: false
+    }
+```
+
+#### Prop:
 
 ```js
   doneButton: {
@@ -176,5 +218,16 @@ Makes the steps square
    squaredTabs: {
     type: Boolean,
     default: false
+  }
+```
+
+## showProgress
+
+Controlling display tab progress lines
+
+```js
+   showProgress: {
+    type: Boolean,
+    default: true
   }
 ```
