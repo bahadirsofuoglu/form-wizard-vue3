@@ -16,6 +16,7 @@
         :index="index"
         :currentIndex="currentTabIndex"
         :squaredTab="squaredTabs"
+        :showProgress="showProgress"
         @click="navigateToTab(index)"
       >
       </wizard-step>
@@ -147,6 +148,10 @@ const props: Props = defineProps({
   squaredTabs: {
     type: Boolean,
     default: false
+  },
+  showProgress: {
+    type: Boolean,
+    default: true
   }
 })
 

@@ -1,6 +1,7 @@
 <template>
   <li>
     <div
+      v-if="showProgress"
       class="fw-list-progress"
       :class="{ 'fw-list-progress-active': progressActive }"
     ></div>
@@ -56,6 +57,10 @@ const props = defineProps({
   squaredTab: {
     type: Boolean,
     default: false
+  },
+  showProgress: {
+    type: Boolean,
+    default: true
   }
 })
 const progressActive = computed(() => props.currentIndex > props.index)
