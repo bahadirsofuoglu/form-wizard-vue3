@@ -254,7 +254,9 @@ const prevTab = async () => {
 }
 
 const setActiveIndex = () => {
-  for (const [index, tab] of tabs.entries()) {
+  const currentTabs: any = tabs.entries()
+
+  for (const [index, tab] of currentTabs) {
     if (index === maxTabIndex + 1) {
       return
     }
