@@ -100,34 +100,6 @@
   .fw-step-checked {
     border: 2px solid $tab-checked;
   }
-
-  .fw-btn {
-    background: $primary;
-    padding: 0.7rem 1.5rem;
-    min-width: unset;
-    border-radius: 0.4rem;
-    border: none;
-
-    font-family: 'DM Sans';
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-
-    text-align: center;
-    color: #ffffff;
-
-    span {
-      margin-right: 3px;
-    }
-
-    &-back {
-      background: $btn-back-bg !important;
-      border: none;
-      span {
-        margin-left: 3px;
-      }
-    }
-  }
 }
 
 .fw-overflow-scroll {
@@ -198,5 +170,41 @@
   }
   .fw-footer {
     padding: 15px;
+  }
+}
+
+.fw-btn {
+  display: flex;
+  align-items: center;
+  background: $primary;
+  cursor: pointer;
+  padding: 0.7rem 1.5rem;
+  min-width: unset;
+  border-radius: 0.4rem;
+  border: none;
+
+  font-family: 'DM Sans';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+
+  text-align: center;
+  color: #ffffff;
+
+  span {
+    margin-right: 3px;
+  }
+
+  &-back {
+    background: $btn-back-bg !important;
+    border: none;
+    span {
+      margin-left: 3px;
+    }
+  }
+
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }

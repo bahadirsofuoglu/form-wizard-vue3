@@ -11,6 +11,7 @@ export interface ButtonOption {
   icon: string
   hideText: boolean
   hideIcon: boolean
+  disabled: boolean
 }
 
 export interface Props {

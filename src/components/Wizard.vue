@@ -16,6 +16,7 @@
         :index="index"
         :currentIndex="currentTabIndex"
         :squaredTab="squaredTabs"
+        :showProgress="showProgress"
         @click="navigateToTab(index)"
       >
       </wizard-step>
@@ -31,12 +32,7 @@
           <div class="fw-footer-left">
             <span v-if="displayPrevTab" role="button" @click="prevTab">
               <slot name="back">
-                <button class="fw-btn fw-btn-back">
-                  <i :class="getIconClass(backButtonOptions.icon)" />
-                  <span v-if="!backButtonOptions.hideText">{{
-                    backButtonOptions.text
-                  }}</span>
-                </button>
+                <Button :options="backButtonOptions" />
               </slot>
             </span>
             <slot name="custom-buttons-left" />
@@ -47,25 +43,15 @@
 
             <span v-if="isLastStep" role="button" @click="nextTab">
               <slot name="done">
-                <button class="fw-btn">
-                  <span v-if="!doneButtonOptions.hideText">{{
-                    doneButtonOptions.text
-                  }}</span>
-                  <i :class="getIconClass(doneButtonOptions.icon)" />
-                </button>
+                <Button :options="doneButtonOptions" />
               </slot>
             </span>
 
-            <span v-else role="button" @click="nextTab">
+            <div v-else role="button" @click="nextTab">
               <slot name="next">
-                <button class="fw-btn">
-                  <span v-if="!nextButtonOptions.hideText">{{
-                    nextButtonOptions.text
-                  }}</span>
-                  <i :class="getIconClass(nextButtonOptions.icon)" />
-                </button>
+                <Button :options="nextButtonOptions" />
               </slot>
-            </span>
+            </div>
           </div>
         </slot>
       </div>
@@ -76,7 +62,8 @@
 <script setup lang="ts">
 import { onMounted, computed, nextTick } from 'vue'
 import WizardStep from './WizardStep.vue'
-import { ButtonOption, Tab, Props } from '../types/wizard'
+import Button from './Button.vue'
+import type { ButtonOption, Tab, Props } from '../types/wizard'
 
 const emit = defineEmits(['change', 'complete:wizard', 'updated:tabs'])
 
@@ -161,6 +148,10 @@ const props: Props = defineProps({
   squaredTabs: {
     type: Boolean,
     default: false
+  },
+  showProgress: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -168,33 +159,44 @@ let maxTabIndex = $ref<number>()
 let currentTabIndex = $ref<number>(0)
 let tabs = $ref<Tab[]>([])
 
-const backButtonOptions: ButtonOption = Object.assign(
-  {
-    text: 'Back',
-    icon: 'arrow-left',
-    hideText: false,
-    hideIcon: false
-  },
-  props.backButton
-)
-const nextButtonOptions: ButtonOption = Object.assign(
-  {
-    text: 'Next',
-    icon: 'arrow-right',
-    hideText: false,
-    hideIcon: false
-  },
-  props.nextButton
-)
-const doneButtonOptions: ButtonOption = Object.assign(
-  {
-    text: 'Done',
-    icon: 'arrow-right',
-    hideText: false,
-    hideIcon: false
-  },
-  props.doneButton
-)
+const backButtonOptions = computed(() => {
+  return Object.assign(
+    {
+      text: 'Back',
+      icon: 'arrow-left',
+      hideText: false,
+      hideIcon: false,
+      disabled: false
+    },
+    props.backButton
+  )
+})
+
+const nextButtonOptions = computed(() => {
+  return Object.assign(
+    {
+      text: 'Next',
+      icon: 'arrow-right',
+      hideText: false,
+      hideIcon: false,
+      disabled: false
+    },
+    props.nextButton
+  )
+})
+
+const doneButtonOptions = computed(() => {
+  return Object.assign(
+    {
+      text: 'Done',
+      icon: 'check',
+      hideText: false,
+      hideIcon: false,
+      disabled: false
+    },
+    props.doneButton
+  )
+})
 
 onMounted(() => {
   setDefaultValues()
@@ -252,7 +254,9 @@ const prevTab = async () => {
 }
 
 const setActiveIndex = () => {
-  for (const [index, tab] of tabs.entries()) {
+  const currentTabs: any = tabs.entries()
+
+  for (const [index, tab] of currentTabs) {
     if (index === maxTabIndex + 1) {
       return
     }
@@ -292,6 +296,4 @@ const changeTab = async (newTabIndex: number) => {
   await nextTick()
   await props.beforeMount()
 }
-
-const getIconClass = (iconName: string) => `pi pi-${iconName}`
 </script>
