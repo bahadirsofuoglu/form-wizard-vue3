@@ -8,6 +8,7 @@
   "compilerOptions": {
     "composite": true,
     "types": ["node"],
-    "allowJs": true
+    "allowJs": true,
+    "target": "ES5"
   }
 }
