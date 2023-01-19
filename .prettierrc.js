@@ -12,7 +12,7 @@ module.exports = {
   requirePragma: false,
   semi: false,
   singleQuote: true,
-  tabWidth: 2,
+  tabWidth: 4,
   trailingComma: 'none',
   useTabs: false,
   vueIndentScriptAndStyle: false
