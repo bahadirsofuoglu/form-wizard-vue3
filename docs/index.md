@@ -14,13 +14,12 @@ Form Wizard Vue 3 is a simple stepper/wizard component. It can be easily customi
 
 ## Features
 
-- Horizontal / Vertical
-- Customizable with slots and SCSS variables
-- TypeScript
-- Accessible
-- Uses [Prime Icons](https://primefaces.org/primevue/icons) (customization is possible)
+-   Horizontal / Vertical
+-   Customizable with slots and SCSS variables
+-   TypeScript
+-   Uses [Prime Icons](https://primefaces.org/primevue/icons) (customization is possible)
 
 ## Resources
 
-- **[GitHub](https://github.com/bahadirsofuoglu/form-wizard-vue3)**
-- **[Demo](https://stackblitz.com/edit/vue-1bngkw?file=src%2FApp.vue)**
+-   **[GitHub](https://github.com/bahadirsofuoglu/form-wizard-vue3)**
+-   **[Demo](https://stackblitz.com/edit/vue-1bngkw?file=src%2FApp.vue)**
