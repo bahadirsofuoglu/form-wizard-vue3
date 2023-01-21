@@ -1,7 +1,7 @@
 <template>
     <button :class="getButtonClass" :disabled="options.disabled">
         <span v-if="!options.hideText">{{ options.text }}</span>
-        <i :class="getIconClass(options.icon)" />
+        <i v-if="!options.hideIcon" :class="getIconClass(options.icon)" />
     </button>
 </template>
 

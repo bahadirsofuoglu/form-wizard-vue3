@@ -74,7 +74,7 @@
 import { onMounted, computed, nextTick, ref } from 'vue'
 import WizardStep from './WizardStep.vue'
 import Button from './Button.vue'
-import type { ButtonOption, Tab, Props } from '../types/wizard'
+import type { Tab, Props } from '../types/wizard'
 
 const emit = defineEmits(['change', 'complete:wizard', 'updated:tabs'])
 

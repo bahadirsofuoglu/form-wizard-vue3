@@ -24,7 +24,8 @@ export default {
                 collapsible: true,
                 items: [
                     { text: 'Props', link: '/api/props' },
-                    { text: 'Events', link: '/api/events' }
+                    { text: 'Events', link: '/api/events' },
+                    { text: 'Slots', link: '/api/slots' }
                 ]
             },
             {
@@ -33,11 +34,11 @@ export default {
                 items: [
                     {
                         text: 'Templating with props',
-                        link: '/api/prop-templating'
+                        link: '/demo/prop-templating'
                     },
                     {
                         text: 'Templating with slots',
-                        link: '/api/slot-templating'
+                        link: '/demo/slot-templating'
                     }
                 ]
             }

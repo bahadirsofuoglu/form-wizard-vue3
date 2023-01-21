@@ -1,10 +1,3 @@
-```js
-  id: {
-    type: String,
-    default: 'fw-' + new Date().valueOf()
-  }
-```
-
 # Props
 
 ## id
